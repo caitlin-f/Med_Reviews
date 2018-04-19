@@ -1,5 +1,5 @@
 /*
-source /Users/Caitlin/Google_Drive/Study/INFS7901/Assignment/SQL_DDL.sql;
+source /Users/Caitlin/Sites/med_reviews/private/sql_scripts/SQL_DDL.sql;
 */
 DROP TABLE IF EXISTS Recommendations;
 DROP TABLE IF EXISTS ResidentDx;
@@ -34,14 +34,13 @@ CREATE TABLE Pharmacist(
 );
 CREATE TABLE Clinic(
 	ClinicID INT NOT NULL AUTO_INCREMENT,
-	Name VARCHAR(20),
+	Name VARCHAR(50),
 	ManagerFirstName VARCHAR(20),
 	ManagerLastName VARCHAR(20),
 	Email VARCHAR(50),
 	Phone INT(12),
 	StreetAddress VARCHAR(50),
 	Suburb VARCHAR(20),
-	City VARCHAR(20),
 	State VARCHAR(4),
 	PostCode INT,
 	PRIMARY KEY (ClinicID)
@@ -65,20 +64,19 @@ CREATE TABLE Facility(
 	CCLastName VARCHAR(20),
 	StreetAddress VARCHAR(50),
 	Suburb VARCHAR(20),
-	City VARCHAR(20),
 	State VARCHAR(4),
 	PostCode INT,
 	PRIMARY KEY (RACID)
 );
 CREATE TABLE Medications(
 	MedID INT NOT NULL AUTO_INCREMENT,
-	GenericName VARCHAR(20),
-	Class VARCHAR(20),
+	GenericName VARCHAR(50),
+	Class VARCHAR(50),
 	Strength VARCHAR(10),
 	PRIMARY KEY (MedID)
 );
 CREATE TABLE Diagnoses(
-	Diagnosis VARCHAR(20) NOT NULL,
+	Diagnosis VARCHAR(100) NOT NULL,
 	PRIMARY KEY (Diagnosis)
 );
 /* 
@@ -88,13 +86,13 @@ Tables with Foreign keys
 */
 /* Medications subclasses */
 CREATE TABLE Oral(
-	Formulation VARCHAR(20) NOT NULL,
+	Formulation VARCHAR(50) NOT NULL,
 	MedID INT NOT NULL,
 	PRIMARY KEY (Formulation, MedID),
 	FOREIGN KEY (MedID) REFERENCES Medications (MedID) ON DELETE CASCADE
 );
 CREATE TABLE Injectable(
-	Administration VARCHAR(20) NOT NULL,
+	Administration VARCHAR(50) NOT NULL,
 	MedID INT NOT NULL,
 	PRIMARY KEY (Administration, MedID),
 	FOREIGN KEY (MedID) REFERENCES Medications (MedID) ON DELETE CASCADE
@@ -149,7 +147,7 @@ CREATE TABLE ResidentHome(
 /* Many to Many Resident/Diagnosis intermediate table */
 CREATE TABLE ResidentDx(
 	ResidentID INT NOT NULL,
-	Diagnosis VARCHAR(20) NOT NULL,
+	Diagnosis VARCHAR(50) NOT NULL,
 	PRIMARY KEY (ResidentID, Diagnosis),
 	FOREIGN KEY (ResidentID) REFERENCES Residents (ResidentID) ON DELETE CASCADE,
 	FOREIGN KEY (Diagnosis) REFERENCES Diagnoses (Diagnosis)

@@ -1,18 +1,18 @@
 /*
-source /Users/Caitlin/Google_Drive/Study/INFS7901/Assignment/INSERT_SQL.sql;
+source /Users/Caitlin/Sites/med_reviews/private/sql_scripts/INSERT_SQL.sql;
 */
 # Pharmacist
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Terry', 'Tidmore', '8798797347', '2018-09-30', '2097878','2018-06-09', 049898989);
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Geoffrey', 'Cosentino','8404803489', '2018-09-30','2089898', '2019-03-13', 0498674865)
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Geoffrey', 'Cosentino','8404803489', '2018-09-30','2089898', '2019-03-13', 0498674865);
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Lyle', 'Clavette','8937493030','2018-09-30','9553934', '2018-09-11', 0498954654);
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Cleaveland', 'Littleton', '6490280850', '2018-09-30', '9845372' ,'2018-08-25', 0424585649);
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Chairmain', 'Griggs', '7493058603', '2018-09-30','8508090','2019-04-30', 0492723542);
 # Clinic
-INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Surburb, City, State, PostCode) VALUES ('Brisbane Central Medical Center', 'Larry', 'John', 'BCmedcent@gmail.com', 0732363409,'198-202 Adelaide St','Brisbane', 'QLD', 4000);
-INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Surburb, City, State, PostCode) VALUES ('Bribane Clinic', 'Amenda', 'Lot', 'brisbaneclinic@gmail.com', 0732704555, '79 Whickham Terrace', 'Brisbane', 'QLD', 4000);
-INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Surburb, City, State, PostCode) VALUES ('Morkare Natural Clinic', 'Joice', 'Sing', 'morkaranaturaclinic@gmail.com',0732265987 '89 Clark Street', 'South Brisbane', 'QLD', 4102);
-INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Surburb, City, State, PostCode) VALUES ('Cannon Hill Family Doctors', 'James', 'Andrews', 'cannonhillfamilydoctors@gmail.com', 0731613225, '17/1177 Wynnum road', 'Cannon Hill', 'QLD', 4170);
-INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Surburb, City, State, PostCode) VALUES ('Malo Clinic Brisbane', 'Mark', 'Long', 'maloclinicbrisbane@gmail.com', 0732299333, 'level 4/106 Edward Street', 'Brisbane', 4000);
+INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Brisbane Central Medical Center', 'Larry', 'John', 'BCmedcent@gmail.com', 0732363409,'198-202 Adelaide St','Brisbane', 'QLD', 4000);
+INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Bribane Clinic', 'Amenda', 'Lot', 'brisbaneclinic@gmail.com', 0732704555, '79 Whickham Terrace', 'Brisbane', 'QLD', 4000);
+INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Morkare Natural Clinic', 'Joice', 'Sing', 'morkaranaturaclinic@gmail.com',0732265987, '89 Clark Street', 'South Brisbane', 'QLD', 4102);
+INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Cannon Hill Family Doctors', 'James', 'Andrews', 'cannonhillfamilydoctors@gmail.com', 0731613225, '17/1177 Wynnum road', 'Cannon Hill', 'QLD', 4170);
+INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Malo Clinic Brisbane', 'Mark', 'Long', 'maloclinicbrisbane@gmail.com', 0732299333, 'level 4/106 Edward Street', 'Brisbane', 'QLD', 4000);
 # Residents
 INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Mavis', 'Brown', '40011111110', '1910-01-01');
 INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('John', 'Smith', '40022222220', '1920-02-02');
@@ -25,11 +25,11 @@ INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Anna-Marie',
 INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Milan', 'Bateman', '40099999990', '1927-10-09');
 INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Travis', 'Driscoll', '40012121210', '1922-05-23');
 # Facility
-INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'FirstName', 'LastName', '1 Facility St', 'Yeronga', 'Brisbane', 'QLD', 4103);
-INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'FirstName', 'LastName', '2 Facility St', 'Bulimba', 'Brisbane', 'QLD', 4002);
-INSERT INTO Facility VALUES (3333,'Bolton Clarke', 'Milford Grange', '0733896500', 150, 'milford@boltonclarke.com', 'FirstName', 'LastName', '3 Facility St', 'Eastern Heights', 'Brisbane', 'QLD', 4403);
-INSERT INTO Facility VALUES (4444,'Churches of Christ', 'Milford Grange', '0733896500', 80, 'milford@boltonclarke.com', 'FirstName', 'LastName', '4 Facility St', 'Eastern Heights', 'Brisbane', 'QLD', 4403);
-INSERT INTO Facility VALUES (5555,'Churches of Christ', 'Bribie Island Aged Care', '0738886577', 80, 'bribie@cofc.com', 'FirstName', 'LastName', '5 Facility St', 'Bongaree', 'Brisbane', 'QLD', 4507);
+INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'FirstName', 'LastName', '1 Facility St', 'Yeronga', 'QLD', 4103);
+INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'FirstName', 'LastName', '2 Facility St', 'Bulimba', 'QLD', 4002);
+INSERT INTO Facility VALUES (3333,'Bolton Clarke', 'Milford Grange', '0733896500', 150, 'milford@boltonclarke.com', 'FirstName', 'LastName', '3 Facility St', 'Eastern Heights', 'QLD', 4403);
+INSERT INTO Facility VALUES (4444,'Churches of Christ', 'Milford Grange', '0733896500', 80, 'milford@boltonclarke.com', 'FirstName', 'LastName', '4 Facility St', 'Eastern Heights', 'QLD', 4403);
+INSERT INTO Facility VALUES (5555,'Churches of Christ', 'Bribie Island Aged Care', '0738886577', 80, 'bribie@cofc.com', 'FirstName', 'LastName', '5 Facility St', 'Bongaree', 'QLD', 4507);
 # Medications
 INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Frusemide', 'Diuretic', '40mg');
 INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Diltiazem', 'Calcium Channel Blocker', '180mg');
@@ -70,6 +70,12 @@ INSERT INTO Topical (Formulation, MedID) VALUES ('Gel', 12);
 INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 13);
 INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 14);
 INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 15);
+# Doctors
+INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (1,'Mary', 'Fields', '379308404', 'MaryFields@gmail.com');
+INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (2, 'Don', 'Pho', '849290402', 'donpho@gmail.com');
+INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (3, 'Jeffery', 'Wright', '683940384', 'jefferywright@gmail.com');
+INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (4, 'Eve', 'Shawn', '739204840', 'eveshawn@gmail.com');
+INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (5, 'Larry', 'King', '6483937493', 'larryking@gmail.com');
 # Review
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,1,1,'2018-04-01','2018-04-11');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (2,2,2,'2018-04-02','2018-04-12');
@@ -115,10 +121,4 @@ INSERT INTO ResidentDx VALUES (4, 'Hypertension');
 INSERT INTO ResidentDx VALUES (4, 'Congestive Cardiac Failure');
 INSERT INTO ResidentDx VALUES (5, 'Dementia');
 INSERT INTO ResidentDx VALUES (5, 'Congestive Cardiac Failure');
-# Doctors
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (1,'Mary', 'Fields', '379308404', 'MaryFields@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (2, 'Don', 'Pho', '849290402', 'donpho@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (3, 'Jeffery', 'Wright', '683940384', 'jefferywright@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (4, 'Eve', 'Shawn', '739204840', 'eveshawn@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (5, 'Larry', 'King', '6483937493', 'larryking@gmail.com');
 # Recommendations
