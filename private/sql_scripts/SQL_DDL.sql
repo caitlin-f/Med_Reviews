@@ -120,6 +120,7 @@ CREATE TABLE Review(
 	DoctorID INT NOT NULL,
 	PharmID INT,
 	ResidentID INT NOT NULL,
+	ReferralDate DATE NOT NULL,
 	ReviewDate DATE,
 	PRIMARY KEY (RevID),
 	FOREIGN KEY (ResidentID) REFERENCES Residents (ResidentID) ON DELETE CASCADE,
