@@ -1,0 +1,127 @@
+/* Colour Palette 
+#3b3a30 - Warm Grey
+#c0ded9 - Light blue/green
+#b2c2bf - Green/grey
+#eaece5 - White/green 
+*/
+
+
+/* header - footer */
+
+header, footer {
+  background: #3b3a30;
+  color: white;
+}
+
+header {
+  height: 65px;
+  margin: 0 0 0 0;
+  padding: 0 0;
+}
+
+footer {
+  height: 20px;
+  margin: 0 0 10px 0;
+  padding: 10px 20px;
+}
+
+header h1 {
+  margin: 0;
+  padding: 15px;
+  font-size: 1.8em;
+  font-family: Veranda, Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+
+/* body */
+
+body {
+  height:980px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 0;
+  padding: 10;
+  text-align: center;
+  font-family: Veranda, Arial, Helvetica, sans-serif;
+  background: #c0ded9;
+}
+
+nav ul {
+  list-style: none;
+  padding: 5;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 1em;
+  margin: 50;
+}
+
+#content{
+  min-height:500px;
+  padding:0 30px;
+}
+
+nav a {
+  color: #000066;
+}
+
+nav a:hover {
+  text-decoration: none;
+}
+
+nav a.selected {
+  color: #000066;
+}
+
+/* tables */
+
+table {
+  border-collapse: collapse;
+  margin-top: 20;
+}
+
+table.list {
+  width: 100%;
+}
+
+table.list tr th {
+  border: 1px solid #3b3a30;
+  background: #3b3a30;
+  color: white;
+  text-align: left;
+}
+
+table.list tr td {
+  border: 1px solid #3b3a30;
+}
+
+/* Residents */
+
+
+
+
+
+
+
+/* Facilities */
+
+
+
+
+
+
+/* Doctors */
+
+
+
+
+
+
+/* Drug Use Evaluations */
