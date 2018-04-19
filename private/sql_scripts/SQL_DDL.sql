@@ -55,8 +55,8 @@ CREATE TABLE Residents(
 );
 CREATE TABLE Facility(
 	RACID INT NOT NULL,
-	Organisation VARCHAR(20),
-	Name VARCHAR(20),
+	Organisation VARCHAR(50),
+	Name VARCHAR(50),
 	Phone VARCHAR(10),
 	BedNumber INT,
 	Email VARCHAR(30),
