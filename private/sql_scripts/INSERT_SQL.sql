@@ -1,12 +1,13 @@
 /*
-source /Users/Caitlin/Sites/med_reviews/private/sql_scripts/INSERT_SQL.sql;
+source /path/to/med_reviews/private/sql_scripts/INSERT_SQL.sql;
 */
 # Pharmacist
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Terry', 'Tidmore', '8798797347', '2018-09-30', '2097878','2018-06-09', 049898989);
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Geoffrey', 'Cosentino','8404803489', '2018-09-30','2089898', '2019-03-13', 0498674865);
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Lyle', 'Clavette','8937493030','2018-09-30','9553934', '2018-09-11', 0498954654);
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Cleaveland', 'Littleton', '6490280850', '2018-09-30', '9845372' ,'2018-08-25', 0424585649);
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone) VALUES ('Chairmain', 'Griggs', '7493058603', '2018-09-30','8508090','2019-04-30', 0492723542);
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Terry', 'Tidmore', '8798797347', '2018-09-30', '2097878','2018-06-09', 049898989, 'TidmoreT@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Geoffrey', 'Cosentino','8404803489', '2018-09-30','2089898', '2019-03-13', 0498674865, 'CosentinoG@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Lyle', 'Clavette','8937493030','2018-09-30','9553934', '2018-09-11', 0498954654, 'ClavetteL@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Cleaveland', 'Littleton', '6490280850', '2018-09-30', '9845372' ,'2018-08-25', 0424585649, 'LittletonC@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Chairmain', 'Griggs', '7493058603', '2018-09-30','8508090','2019-04-30', 0492723542, 'GriggsC@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Caitlin', 'Falconer', '1234567890', '2018-09-30','1234567','2018-06-30', 0415123456, 'FalconerC@RMMR.com');
 # Clinic
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Brisbane Central Medical Center', 'Larry', 'John', 'BCmedcent@gmail.com', 0732363409,'198-202 Adelaide St','Brisbane', 'QLD', 4000);
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Bribane Clinic', 'Amenda', 'Lot', 'brisbaneclinic@gmail.com', 0732704555, '79 Whickham Terrace', 'Brisbane', 'QLD', 4000);
@@ -82,6 +83,10 @@ INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VAL
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (3,3,3,'2018-04-03','2018-04-13');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (4,4,4,'2018-04-04','2018-04-14');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (5,5,5,'2018-04-05','2018-04-15');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,1,1,'2016-03-05','2016-03-15');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (2,2,2,'2016-03-05','2016-03-15');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (3,3,3,'2016-03-05','2016-03-15');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate) VALUES (1,1,6,'2018-04-20');
 # ResidentRx
 INSERT INTO ResidentRx VALUES (1,6,'Daily','1');
 INSERT INTO ResidentRx VALUES (1,2,'Daily','2');
@@ -122,3 +127,8 @@ INSERT INTO ResidentDx VALUES (4, 'Congestive Cardiac Failure');
 INSERT INTO ResidentDx VALUES (5, 'Dementia');
 INSERT INTO ResidentDx VALUES (5, 'Congestive Cardiac Failure');
 # Recommendations
+INSERT INTO Recommendations VALUES ('Oedema on CCB', 1, 'The calcium channel blocker diltiazem may be causing oedema', 'Change to hydrochlorothiazide');
+INSERT INTO Recommendations VALUES ('Risperidone', 2, 'No behaviours reported on risperidone', 'Consider ceasing the risperidone');
+INSERT INTO Recommendations VALUES ('Rivastigmine in advanced dementia', 3, 'Rivastigmine may be of limited benefit at this stage', 'Cease medication');
+INSERT INTO Recommendations VALUES ('Aspirin and bleed', 4, 'GI bleed reported on the aspirin', 'Cease medication');
+INSERT INTO Recommendations VALUES ('Frusemide without oedema', 5, 'No further issues with oedema reported', 'Minimise the frusemide');
