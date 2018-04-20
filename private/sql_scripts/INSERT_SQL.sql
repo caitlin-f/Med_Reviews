@@ -15,16 +15,16 @@ INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, Stree
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Cannon Hill Family Doctors', 'James', 'Andrews', 'cannonhillfamilydoctors@gmail.com', 0731613225, '17/1177 Wynnum road', 'Cannon Hill', 'QLD', 4170);
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Malo Clinic Brisbane', 'Mark', 'Long', 'maloclinicbrisbane@gmail.com', 0732299333, 'level 4/106 Edward Street', 'Brisbane', 'QLD', 4000);
 # Residents
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Mavis', 'Brown', '40011111110', '1910-01-01');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('John', 'Smith', '40022222220', '1920-02-02');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Jack', 'Masters', '40033333330', '1930-03-03');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Lyla', 'Sands', '40044444440', '1915-04-04');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Beth', 'Royal', '40055555550', '1925-05-05');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Cerys', 'Lloyd', '40066666660', '1916-12-01');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Kendall', 'Nicholson', '40077777770', '1935-07-11');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Anna-Marie', 'Hamilton', '400888888880', '1928-04-05');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Milan', 'Bateman', '40099999990', '1927-10-09');
-INSERT INTO Residents (FirstName, LastName, Medicare, DOB) VALUES ('Travis', 'Driscoll', '40012121210', '1922-05-23');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Mavis', 'Brown', '40011111110', '1910-01-01');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('John', 'Smith', '40022222220', '1920-02-02');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Jack', 'Masters', '40033333330', '1930-03-03');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Lyla', 'Sands', '40044444440', '1915-04-04');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Beth', 'Royal', '40055555550', '1925-05-05');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Cerys', 'Lloyd', '40066666660', '1916-12-01');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Kendall', 'Nicholson', '40077777770', '1935-07-11');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Anna-Marie', 'Hamilton', '400888888880', '1928-04-05');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Milan', 'Bateman', '40099999990', '1927-10-09');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Travis', 'Driscoll', '40012121210', '1922-05-23');
 # Facility
 INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'FirstName', 'LastName', '1 Facility St', 'Yeronga', 'QLD', 4103);
 INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'FirstName', 'LastName', '2 Facility St', 'Bulimba', 'QLD', 4002);
@@ -32,27 +32,27 @@ INSERT INTO Facility VALUES (3333,'Bolton Clarke', 'Milford Grange', '0733896500
 INSERT INTO Facility VALUES (4444,'Churches of Christ', 'Milford Grange', '0733896500', 80, 'milford@boltonclarke.com', 'FirstName', 'LastName', '4 Facility St', 'Eastern Heights', 'QLD', 4403);
 INSERT INTO Facility VALUES (5555,'Churches of Christ', 'Bribie Island Aged Care', '0738886577', 80, 'bribie@cofc.com', 'FirstName', 'LastName', '5 Facility St', 'Bongaree', 'QLD', 4507);
 # Medications
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Frusemide', 'Diuretic', '40mg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Diltiazem', 'Calcium Channel Blocker', '180mg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Risperidone', 'Antipsychotic', '500mcg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Buprenorphine', 'Opioid', '5mcg/h');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Morphine', 'Opioid', '5mg/ml');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Irbesartan', 'ACE Inhibitor', '150mg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Aspirin', 'NSAID', '100mg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Risperidone', 'Antipsychotic', '37.5mg');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Metoclopramide', 'Antiemetic', '5mg/ml');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Insulin Glargine', 'Insulin', '100u/ml');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Insulin Aspart', 'Insulin', '100u/ml');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Diclofenac', 'NSAID', '1%');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Fentanyl', 'Opioid', '12.5mcg/h');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Fentanyl', 'Opioid', '25mcg/h');
-INSERT INTO Medications (GenericName, Class, Strength) VALUES ('Rivastigmine', 'Anticholinesterase', '4.6mg/24h');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Frusemide', 'Diuretic', '40mg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Diltiazem', 'Calcium Channel Blocker', '180mg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Risperidone', 'Antipsychotic', '500mcg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Buprenorphine', 'Opioid', '5mcg/h');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Morphine', 'Opioid', '5mg/ml');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Irbesartan', 'ACE Inhibitor', '150mg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Aspirin', 'NSAID', '100mg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Risperidone', 'Antipsychotic', '37.5mg');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Metoclopramide', 'Antiemetic', '5mg/ml');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Insulin Glargine', 'Insulin', '100u/ml');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Insulin Aspart', 'Insulin', '100u/ml');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Diclofenac', 'NSAID', '1%');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Fentanyl', 'Opioid', '12.5mcg/h');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Fentanyl', 'Opioid', '25mcg/h');
+INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Rivastigmine', 'Anticholinesterase', '4.6mg/24h');
 # Diagnoses
-INSERT INTO Diagnoses VALUES ('Diabetes');
-INSERT INTO Diagnoses VALUES ('Congestive Cardiac Failure');
-INSERT INTO Diagnoses VALUES ('Hypertension');
-INSERT INTO Diagnoses VALUES ('Dementia');
-INSERT INTO Diagnoses VALUES ("Parkinson's Disease");
+INSERT INTO Diagnosis VALUES ('Diabetes');
+INSERT INTO Diagnosis VALUES ('Congestive Cardiac Failure');
+INSERT INTO Diagnosis VALUES ('Hypertension');
+INSERT INTO Diagnosis VALUES ('Dementia');
+INSERT INTO Diagnosis VALUES ("Parkinson's Disease");
 # Oral
 INSERT INTO Oral (Formulation, MedID) VALUES ('Tablet', 1);
 INSERT INTO Oral (Formulation, MedID) VALUES ('SR Capsule', 2);
@@ -72,11 +72,11 @@ INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 13);
 INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 14);
 INSERT INTO Topical (Formulation, MedID) VALUES ('Patch', 15);
 # Doctors
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (1,'Mary', 'Fields', '379308404', 'MaryFields@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (2, 'Don', 'Pho', '849290402', 'donpho@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (3, 'Jeffery', 'Wright', '683940384', 'jefferywright@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (4, 'Eve', 'Shawn', '739204840', 'eveshawn@gmail.com');
-INSERT INTO Doctors (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (5, 'Larry', 'King', '6483937493', 'larryking@gmail.com');
+INSERT INTO Doctor (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (1,'Mary', 'Fields', '379308404', 'MaryFields@gmail.com');
+INSERT INTO Doctor (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (2, 'Don', 'Pho', '849290402', 'donpho@gmail.com');
+INSERT INTO Doctor (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (3, 'Jeffery', 'Wright', '683940384', 'jefferywright@gmail.com');
+INSERT INTO Doctor (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (4, 'Eve', 'Shawn', '739204840', 'eveshawn@gmail.com');
+INSERT INTO Doctor (ClinicID, FirstName, LastName, ProviderNumber, PersonalEmail) VALUES (5, 'Larry', 'King', '6483937493', 'larryking@gmail.com');
 # Review
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,1,1,'2018-04-01','2018-04-11');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (2,2,2,'2018-04-02','2018-04-12');
@@ -127,8 +127,8 @@ INSERT INTO ResidentDx VALUES (4, 'Congestive Cardiac Failure');
 INSERT INTO ResidentDx VALUES (5, 'Dementia');
 INSERT INTO ResidentDx VALUES (5, 'Congestive Cardiac Failure');
 # Recommendations
-INSERT INTO Recommendations VALUES ('Oedema on CCB', 1, 'The calcium channel blocker diltiazem may be causing oedema', 'Change to hydrochlorothiazide');
-INSERT INTO Recommendations VALUES ('Risperidone', 2, 'No behaviours reported on risperidone', 'Consider ceasing the risperidone');
-INSERT INTO Recommendations VALUES ('Rivastigmine in advanced dementia', 3, 'Rivastigmine may be of limited benefit at this stage', 'Cease medication');
-INSERT INTO Recommendations VALUES ('Aspirin and bleed', 4, 'GI bleed reported on the aspirin', 'Cease medication');
-INSERT INTO Recommendations VALUES ('Frusemide without oedema', 5, 'No further issues with oedema reported', 'Minimise the frusemide');
+INSERT INTO Recommendation VALUES ('Oedema on CCB', 1, 'The calcium channel blocker diltiazem may be causing oedema', 'Change to hydrochlorothiazide');
+INSERT INTO Recommendation VALUES ('Risperidone', 2, 'No behaviours reported on risperidone', 'Consider ceasing the risperidone');
+INSERT INTO Recommendation VALUES ('Rivastigmine in advanced dementia', 3, 'Rivastigmine may be of limited benefit at this stage', 'Cease medication');
+INSERT INTO Recommendation VALUES ('Aspirin and bleed', 4, 'GI bleed reported on the aspirin', 'Cease medication');
+INSERT INTO Recommendation VALUES ('Frusemide without oedema', 5, 'No further issues with oedema reported', 'Minimise the frusemide');
