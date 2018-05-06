@@ -1,21 +1,17 @@
 <?php require_once('../../private/init.php'); ?>
 
 <?php
-
-	$all_residents = select_all_residents();
-	// $all_residents = [
-	// ['ResidentID' => '1', 'FirstName' => 'Mavis', 'LastName' => 'Brown', 'Medicare' => '40011111111', 'DOB' => '01/01/1910'],
-	// ['ResidentID' => '2', 'FirstName' => 'John', 'LastName' => 'Smith', 'Medicare' => '40022222222', 'DOB' => '02/02/1920'],
-	// ['ResidentID' => '3', 'FirstName' => 'Jack', 'LastName' => 'Masters', 'Medicare' => '40033333333', 'DOB' => '03/03/1930'],
-	// ['ResidentID' => '4', 'FirstName' => 'Lyla', 'LastName' => 'Sands', 'Medicare' => '40044444444', 'DOB' => '04/04/1915'],
-	// ['ResidentID' => '5', 'FirstName' => 'Beth', 'LastName' => 'Royal', 'Medicare' => '40055555555', 'DOB' => '05/05/1925'],
-	// ['ResidentID' => '6', 'FirstName' => 'Mavis', 'LastName' => 'Brown', 'Medicare' => '40011111111', 'DOB' => '01/01/1910'],
-	// ];
-
+	$lastname = empty($_POST["lastname"]) ? "'%'" : '"'.$_POST["lastname"].'"';
+	$firstname = empty($_POST["firstname"]) ? "'%'" : '"'.$_POST["firstname"].'"';
+	$facility = empty($_POST["facility"]) ? "'%'" : '"'.$_POST["facility"].'"';
+	$all_residents = select_all_residents($lastname, $firstname, $facility);
 ?>
 
 <?php $page_title = 'Residents'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<header class='resident'>
+	<?php echo $page_title ?>
+</header>
 
 <div id="content">
 	<article id="resident">
@@ -33,8 +29,9 @@
 				<?php foreach($all_residents as $resident) { ?>
 					<tr>
 						<td><?php echo h($resident['ResidentID']); ?></td>
-						<td><?php echo h($resident['FirstName']); ?></td>
 						<td><?php echo h($resident['LastName']); ?></td>
+						<td><?php echo h($resident['FirstName']); ?></td>
+					
 						<td><?php echo h($resident['Medicare']); ?></td>
 						<td><?php echo h($resident['DOB']); ?></td>
 						<td><a class="action" href="<?php echo url_to('/all_residents/resident/index.php?id='.h(u($resident['ResidentID'])));?>">Edit</a></td>

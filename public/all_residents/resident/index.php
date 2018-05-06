@@ -6,7 +6,9 @@ $res_info = find_resident_info($id); // SQL query on Resident for ResidentID
 
 <?php $page_title = 'Resident'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
-
+<header class='resident'>
+	<?php echo $page_title ?>
+</header>
 
 <div id="content">
 	<article id="resident">

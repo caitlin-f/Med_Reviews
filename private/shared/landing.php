@@ -6,6 +6,7 @@
 	<title><?php echo $page_title; ?></title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" media="all" href="<?php echo WWW_ROOT . '/stylesheets/home.css'; ?>" />
+
 </head>
 
 <body>
@@ -26,7 +27,4 @@
 			<a href="<?php echo url_to('/due/index.php'); ?>">REPORTS</a></div>
 		</div>
 	</nav>
-
-
-</div>
 

@@ -1,8 +1,15 @@
 <?php require_once('../../private/init.php'); ?>
+<?php
+	$organisation = empty($_POST["organisation"]) ? "'%'" : '"'.$_POST["organisation"].'"';
+	$name = empty($_POST["facility_name"]) ? "'%'" : '"'.$_POST["facility_name"].'"';
+	$all_facilities = select_all_facilities($organisation, $name);
+?>
 
-<?php $all_facilities = select_all_facilities(); ?>
 <?php $page_title = 'Facilities'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<header class='facility'>
+	<?php echo $page_title ?>
+</header>
 
 <div id="content">
 	<article id="facility">
@@ -27,7 +34,7 @@
 						<td><?php echo h($facility["BedNumber"]); ?></td>
 						<td><?php echo h($facility["Email"]); ?></td>
 						<td><?php echo h($facility["CCFirstName"].' '.$facility["CCLastName"]); ?></td>
-						<td><?php echo h($facility["StreetAddress"].' '.$facility["Suburb"].' '.$facility["City"].' '.$facility["State"].' '.$facility["PostCode"]); ?></td>
+						<td><?php echo h($facility["StreetAddress"].' '.$facility["Suburb"].' '.$facility["State"].' '.$facility["PostCode"]); ?></td>
 					</tr>
 				<?php } ?>
 			</table>

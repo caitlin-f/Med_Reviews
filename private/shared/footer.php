@@ -4,6 +4,5 @@
   echo date("l jS \of F Y"); 
   ?>
 </footer>
-
 </body>
 </html>

@@ -2,6 +2,9 @@
 
 <?php $page_title = 'Doctor'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<header class='doctor'>
+	<?php echo $page_title ?>
+</header>
 
 <div id="content">
 	<article id="doctor">
