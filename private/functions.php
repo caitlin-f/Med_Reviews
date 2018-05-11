@@ -60,6 +60,44 @@ function clinic_options($all_clinics) {
 	return $option_string;
 }
 
+function disease_string($diagnoses) {
+	$disease_string = '';
+	$n = 1; 
+	foreach($diagnoses as $diagnosis) {
+		if ($n == sizeof($diagnoses)) { // if last item in array append </tr> to very end of string
+			if ($n == 1) { // first and final item in row
+				$disease_string .= '<tr><td>'.$diagnosis['Disease'].',</td></tr>';
+			} else { // final item in row
+				$disease_string.='<td>'.$diagnosis['Disease'].'</tr>';
+			}
+		} else {
+			if ($n == 1) { // if item in row, open <tr> flag
+				$disease_string .= '<tr><td>'.$diagnosis['Disease'].',</td>';
+				$n += 1;
+			} elseif ($n == 8) { // if last item in row, close <tr> flag
+				$disease_string.='<td>'.$diagnosis['Disease'].'</td></tr>';
+				$n = 1;
+			} else { // any other item in row
+				$disease_string.='<td>'.$diagnosis['Disease'].',</td>';
+				$n += 1;
+			}
+		}
+	}
+	return $disease_string;
+}
+
+function medication_string($medications) {
+	$medication_string = '';
+	foreach($medications as $medication) {
+		$medication_string .= '<tr><td>'.$medication['GenericName'].'<td>';
+		$medication_string .= '<td>'.$medication['Form'].'</td>';
+		$medication_string .= '<td>'.$medication['Strength'].'</td>';
+		$medication_string .= '<td>'.$medication['Dose'].'</td>';
+		$medication_string .= '<td>'.$medication['Frequency'].'</td></tr>';
+	}
+	return $medication_string;
+}
+
 ?>
 
 <script>

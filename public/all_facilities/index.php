@@ -2,7 +2,7 @@
 <?php
 	$organisation = empty($_POST["organisation"]) ? "'%'" : '"'.$_POST["organisation"].'"';
 	$name = empty($_POST["facility_name"]) ? "'%'" : '"'.$_POST["facility_name"].'"';
-	$all_facilities = select_all_facilities($organisation, $name);
+	$all_facilities = get_all_facilities($organisation, $name);
 ?>
 
 <?php $page_title = 'Facilities'; ?>

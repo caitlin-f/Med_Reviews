@@ -2,15 +2,14 @@
 <?php 
 $resident_data = resident_names_facilities();
 $wd = "'%'";
-$facility_data = select_all_facilities($wd, $wd);
-$organisation_data = select_all_organisations();
-$clinic_data = select_all_clinics_doctors($wd, $wd, $wd);
+$facility_data = get_all_facilities($wd, $wd);
+$organisation_data = get_all_organisations();
+$clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 ?>
 
 <?php $page_title = 'Medication Management Reviews'; ?>
 
 <?php include(SHARED_PATH . '/landing.php'); ?>
-
 
 <div>
 	<img src="<?php echo WWW_ROOT. '/img/meds.jpg'; ?>" 
@@ -20,6 +19,8 @@ $clinic_data = select_all_clinics_doctors($wd, $wd, $wd);
 	width: 100%; 
 	height: auto;
 	z-index: -1;">
+	<!-- <img src="<?php echo WWW_ROOT. '/img/longlogo.png'; ?>" style="height:150px; display: block; -->
+    <!-- margin: 0 auto;"> -->
 </div>
 
 <div id="content" class="grid-content">

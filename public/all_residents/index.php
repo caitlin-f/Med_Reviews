@@ -4,7 +4,7 @@
 	$lastname = empty($_POST["lastname"]) ? "'%'" : '"'.$_POST["lastname"].'"';
 	$firstname = empty($_POST["firstname"]) ? "'%'" : '"'.$_POST["firstname"].'"';
 	$facility = empty($_POST["facility"]) ? "'%'" : '"'.$_POST["facility"].'"';
-	$all_residents = select_all_residents($lastname, $firstname, $facility);
+	$all_residents = get_all_residents($lastname, $firstname, $facility);
 ?>
 
 <?php $page_title = 'Residents'; ?>
@@ -19,12 +19,11 @@
 			<table class="list">
 				<tr>
 					<th>ResidentID</th>
-					<th>First Name</th>
 					<th>Last Name</th>
+					<th>First Name</th>
 					<th>Medicare</th>
 					<th>DOB</th>
 					<th>&nbsp;</th>
-	  	    		<th>&nbsp;</th>
 				</tr>
 				<?php foreach($all_residents as $resident) { ?>
 					<tr>
@@ -34,8 +33,7 @@
 					
 						<td><?php echo h($resident['Medicare']); ?></td>
 						<td><?php echo h($resident['DOB']); ?></td>
-						<td><a class="action" href="<?php echo url_to('/all_residents/resident/index.php?id='.h(u($resident['ResidentID'])));?>">Edit</a></td>
-						<td><a class="action" href="">Print</a></td>
+						<td><a class="action" href="<?php echo url_to('/all_residents/resident/view.php?id='.h(u($resident['ResidentID'])));?>">View</a></td>
 					</tr>
 				<?php } ?>
 			</table>

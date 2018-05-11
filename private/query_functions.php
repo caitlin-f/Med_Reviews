@@ -1,6 +1,6 @@
 <?php
 
-function select_all_residents($lastname, $firstname, $facility) {
+function get_all_residents($lastname, $firstname, $facility) {
 	global $db;
 
 	$sql = "SELECT R.*
@@ -31,16 +31,24 @@ function resident_names_facilities() {
 
 }
 
-function find_resident_info($id) {
+function get_resident_info($id) {
 	global $db;
 
-	$sql = "SELECT * FROM Resident WHERE ResidentID='".$id."'";
+	$sql = "SELECT R.*, F.Organisation, F.Name, H.AdminDate 
+	 FROM Resident R, ResidentHome H, Facility F
+	 WHERE R.ResidentID = $id
+	  AND H.ResidentID = R.ResidentID
+	  AND H.RACID = F.RACID
+	  AND H.AdminDate =
+		(SELECT Max(H2.AdminDate)
+		 FROM ResidentHome H2
+		 WHERE H2.ResidentID = R.ResidentID)";
 	$result = $db->query($sql);
 	$array = $result->fetch(PDO::FETCH_ASSOC);
 	return $array;
 }
 
-function select_all_facilities($organisation, $name) {
+function get_all_facilities($organisation, $name) {
 	global $db;
 
 	$sql = "SELECT * FROM Facility
@@ -51,7 +59,7 @@ function select_all_facilities($organisation, $name) {
 	return $array;
 }
 
-function select_all_organisations() {
+function get_all_organisations() {
 	global $db;
 
 	$sql = "SELECT DISTINCT Organisation FROM Facility";
@@ -60,18 +68,87 @@ function select_all_organisations() {
 	return $array;
 }
 
-function select_all_clinics_doctors($firstname, $lastname, $clinic) {
+function get_all_clinics_doctors($firstname, $lastname, $clinic) {
 	global $db;
 
 	$sql = "SELECT D.*, C.Name
 	 FROM Doctor D, Clinic C
 	 WHERE C.ClinicID = D.ClinicID
-	 AND D.FirstName LIKE $firstname
-	 AND D.LastName LIKE $lastname
-	 AND C.Name LIKE $clinic";
+	  AND D.FirstName LIKE $firstname
+	  AND D.LastName LIKE $lastname
+	  AND C.Name LIKE $clinic";
 	 $result = $db->query($sql);
 	 $array = $result->fetchALL(PDO::FETCH_ASSOC);
 	 return $array;
+}
+
+function resident_Dx($id) {
+	global $db;
+
+	$sql = "SELECT Disease From ResidentDx
+	 WHERE ResidentID = $id";
+	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+}
+
+function latest_resident_Rx($id) {
+	global $db;
+
+	$sql = "SELECT Med.GenericName, COALESCE(O.Formulation, T.Formulation, I.Administration) AS Form, Med.Strength, Rx.Dose, Rx.Frequency
+		FROM Review Rev1, ResidentRx Rx, Resident Res, Medication Med
+		 LEFT JOIN Oral O ON O.MedID = Med.MedID
+		 LEFT JOIN Topical T ON T.MedID = Med.MedID
+		 LEFT JOIN Injectable I ON I.MedID = Med.MedID
+		WHERE Res.ResidentID = $id
+		 AND Rev1.RevID = Rx.RevID
+		 AND Res.ResidentID = Rev1.ResidentID
+		 AND Rx.MedID = Med.MedID 
+		 AND Rev1.ReviewDate = (
+			SELECT MAX(Rev2.ReviewDate)
+			FROM Review Rev2
+			WHERE Rev1.ResidentID = Rev2.ResidentID)";
+
+	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+}
+
+function resident_Rx($rev) {
+	global $db;
+
+	$sql = "SELECT Med.GenericName, COALESCE(O.Formulation, T.Formulation, I.Administration) AS Form, Med.Strength, Rx.Dose, Rx.Frequency
+	FROM Review Rev1, ResidentRx Rx, Medication Med
+	 LEFT JOIN Oral O ON O.MedID = Med.MedID
+	 LEFT JOIN Topical T ON T.MedID = Med.MedID
+	 LEFT JOIN Injectable I ON I.MedID = Med.MedID
+	WHERE Rev1.RevID = $rev
+	 AND Rev1.RevID = Rx.RevID
+	 AND Rx.MedID = Med.MedID";
+
+	 return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+}
+
+function all_resident_reviews($id) {
+	global $db;
+
+	$sql = "SELECT D.FirstName AS D_First, D.LastName AS D_Last, 
+		 R.ReferralDate, R.ReviewDate, R.RevID, Res.ResidentID,
+		 P.FirstName AS P_First, P.LastName AS P_Last
+	 	FROM Doctor D, Pharmacist P, Review R, Resident Res
+	 	WHERE Res.ResidentID = $id
+	  	 AND Res.ResidentID = R.ResidentID
+	  	 AND D.DoctorID = R.DoctorID
+	  	 AND P.PharmID = R.PharmID
+	  	ORDER BY R.ReferralDate DESC";
+
+	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+}
+
+function get_recommendations($rev) {
+	global $db;
+
+	$sql = "SELECT Title, Information, Options
+		FROM Recommendation
+		WHERE RevID = $rev";
+
+	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
 }
 
 ?>

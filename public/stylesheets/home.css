@@ -55,13 +55,12 @@
   grid-template-rows: 200px, 1;
   grid-template-areas:
   'left1 left2 middle1 middle2 right1 right2'
-  'footer footer footer footer footer footer'
   ;
 }
 .left2, .middle1, .middle2, .right1{
   height: 275px;
   color: white;
-  margin: 10 0 10 0;
+  margin: -50 0 10 0;
   padding: 15 15 10 10;
   font-family: Raleway, Veranda, Arial, Helvetica, sans-serif;;
   /*border: 1px solid black;*/
@@ -70,7 +69,6 @@
 }
 .left1 {
   grid-area:left1;
-  
 }
 .left2 {
   grid-area: left2;
@@ -95,7 +93,13 @@
 /* nav */
 nav {
   padding: 10;
-  height: 80px;
+  height: 70px;
+  font-family: Veranda, Arial, Helvetica, sans-serif;
+  background: #FFFFFF;
+}
+nav.landing {
+  padding: 10;
+  height: 110px;
   font-family: Veranda, Arial, Helvetica, sans-serif;
   background: #FFFFFF;
 }
@@ -166,7 +170,16 @@ header.report {
   background: rgba(7, 33, 27, 0.85);
 }
 
+header.review {
+  background: #36324F;
+}
+
 /* body */
+
+p {
+  margin-left:20px;
+  margin-right: 20px;
+}
 
 body {
   margin: 0;
@@ -253,14 +266,14 @@ table.list {
 }
 
 table.list tr th {
-  border: 1px solid #3b3a30;
-  background: #3b3a30;
+  border: 1px solid #081423;
+  background: #5C697B;
   color: white;
   text-align: left;
 }
 
 table.list tr td {
-  border: 1px solid #3b3a30;
+  border: 1px solid #081423;
 }
 
 th {

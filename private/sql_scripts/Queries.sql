@@ -44,7 +44,7 @@ FROM Clinic;
 
 /* Get resident medication list from latest review */
 SELECT Res.FirstName, Res.LastName, Med.GenericName, Med.Strength, Rx.Dose, Rx.Frequency
-FROM Review Rev1, ResidentRx Rx, Residents Res, Medications Med
+FROM Review Rev1, ResidentRx Rx, Resident Res, Medication Med
 WHERE Rev1.RevID = Rx.RevID AND
 Res.ResidentID = Rev1.ResidentID AND
 Rx.MedID = Med.MedID AND 
@@ -52,6 +52,21 @@ Rev1.ReviewDate = (
 SELECT MAX(ReviewDate)
 FROM Review Rev2
 WHERE Rev1.ResidentID = Rev2.ResidentID);
+
+/* Get resident medictation list from latest review including formulation/administration subclass */
+SELECT Res.FirstName, Res.Lastname, Med.GenericName, COALESCE(O.Formulation, T.Formulation, I.Administration) AS Form, Med.Strength, Rx.Dose, Rx.Frequency
+FROM Review Rev1, ResidentRx Rx, Resident Res, Medication Med
+LEFT JOIN Oral O ON O.MedID = Med.MedID
+LEFT JOIN Topical T ON T.MedID = Med.MedID
+LEFT JOIN Injectable I ON I.MedID = Med.MedID
+WHERE Rev1.ReviD = Rx.RevID
+AND Res.ResidentID = Rev1.ResidentID
+AND Rx.MedID = Med.MedID 
+AND Rev1.ReviewDate = (
+	SELECT MAX(Rev2.ReviewDate)
+	FROM Review Rev2
+	WHERE Rev1.ResidentID = Rev2.ResidentID);
+
 
 /* Find pharmacists who have written recommendations for all the reviews they have been assigned */
 SELECT P.PharmID

@@ -6,7 +6,7 @@
 	$firstname = $names[0].'"';
 	$lastname = '"'.$names[1];
 
-	$doctor_details = select_all_clinics_doctors($firstname, $lastname, $clinic);
+	$doctor_details = get_all_clinics_doctors($firstname, $lastname, $clinic);
 
 ?>
 
