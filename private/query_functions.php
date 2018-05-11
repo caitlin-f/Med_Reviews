@@ -87,7 +87,9 @@ function resident_Dx($id) {
 
 	$sql = "SELECT Disease From ResidentDx
 	 WHERE ResidentID = $id";
-	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
 }
 
 function latest_resident_Rx($id) {
@@ -107,7 +109,9 @@ function latest_resident_Rx($id) {
 			FROM Review Rev2
 			WHERE Rev1.ResidentID = Rev2.ResidentID)";
 
-	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
 }
 
 function resident_Rx($rev) {
@@ -122,7 +126,9 @@ function resident_Rx($rev) {
 	 AND Rev1.RevID = Rx.RevID
 	 AND Rx.MedID = Med.MedID";
 
-	 return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
 }
 
 function all_resident_reviews($id) {
@@ -138,7 +144,9 @@ function all_resident_reviews($id) {
 	  	 AND P.PharmID = R.PharmID
 	  	ORDER BY R.ReferralDate DESC";
 
-	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
 }
 
 function get_recommendations($rev) {
@@ -148,7 +156,9 @@ function get_recommendations($rev) {
 		FROM Recommendation
 		WHERE RevID = $rev";
 
-	return ($db->query($sql))->fetchALL(PDO::FETCH_ASSOC);
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
 }
 
 ?>
