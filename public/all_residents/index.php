@@ -20,7 +20,7 @@
 				<tr>
 					<th>ResidentID</th>
 					<th>Last Name</th>
-					<th>First Name</th>
+					<th>Name</th>
 					<th>Medicare</th>
 					<th>DOB</th>
 					<th>&nbsp;</th>

@@ -1,9 +1,19 @@
+<?php require_once('functions.php'); ?>
+
 <?php
 
+// Get all data for each resident as well as their facility
+// Select only from Resident table if facility is set to 'any'
 function get_all_residents($lastname, $firstname, $facility) {
 	global $db;
-
-	$sql = "SELECT R.*
+	if ($facility == "'%'") {
+		$sql = "SELECT *
+		 FROM Resident
+		 WHERE LastName LIKE $lastname AND 
+	  	  FirstName LIKE $firstname
+	  	 ORDER BY LastName";
+	} else {
+		$sql = "SELECT R.*
 	 FROM Resident R, ResidentHome RH, Facility F
 	 WHERE R.ResidentID = RH.ResidentID AND
 	  RH.RACID = F.RACID AND
@@ -11,12 +21,14 @@ function get_all_residents($lastname, $firstname, $facility) {
 	  R.FirstName LIKE $firstname AND 
 	  F.Name LIKE $facility
 	 ORDER BY R.LastName";
+	}
 
 	$result = $db->query($sql);
 	$array = $result->fetchALL(PDO::FETCH_ASSOC);
 	return $array;
 }
 
+// Get resident names and the name of their facility
 function resident_names_facilities() {
 	global $db;
 
@@ -31,6 +43,7 @@ function resident_names_facilities() {
 
 }
 
+// Get all information on the resident as well as the facility name, organisation and admission date for their current facility
 function get_resident_info($id) {
 	global $db;
 
@@ -48,6 +61,7 @@ function get_resident_info($id) {
 	return $array;
 }
 
+// Get all data on the facilities
 function get_all_facilities($organisation, $name) {
 	global $db;
 
@@ -59,6 +73,7 @@ function get_all_facilities($organisation, $name) {
 	return $array;
 }
 
+// Get organisation names without duplication
 function get_all_organisations() {
 	global $db;
 
@@ -68,6 +83,7 @@ function get_all_organisations() {
 	return $array;
 }
 
+// Get all doctor details as the name of the clinic they are in
 function get_all_clinics_doctors($firstname, $lastname, $clinic) {
 	global $db;
 
@@ -82,6 +98,7 @@ function get_all_clinics_doctors($firstname, $lastname, $clinic) {
 	 return $array;
 }
 
+// Get a diagnosis list for a specific resident by ResidentID
 function resident_Dx($id) {
 	global $db;
 
@@ -92,6 +109,7 @@ function resident_Dx($id) {
 	return $array;
 }
 
+// Get the medication list from the most recent review for a specific resident
 function latest_resident_Rx($id) {
 	global $db;
 
@@ -114,6 +132,7 @@ function latest_resident_Rx($id) {
 	return $array;
 }
 
+// Get the medication list for a specific review based on RevID
 function resident_Rx($rev) {
 	global $db;
 
@@ -131,6 +150,7 @@ function resident_Rx($rev) {
 	return $array;
 }
 
+// Get details including doctors= and pharmacist names for all the reviews a resident has received
 function all_resident_reviews($id) {
 	global $db;
 
@@ -149,6 +169,7 @@ function all_resident_reviews($id) {
 	return $array;
 }
 
+// Get the recommendations associated with a reviews
 function get_recommendations($rev) {
 	global $db;
 
@@ -159,6 +180,46 @@ function get_recommendations($rev) {
 	$result = $db->query($sql);
 	$array = $result->fetchALL(PDO::FETCH_ASSOC);
 	return $array;
+}
+
+// insert a new resident and associate with a facility
+function insert_new_resident($firstname, $lastname, $medicare, $dob, $facility, $admission) {
+	global $db;
+
+	// use "BEGIN" and "COMMIT" clause to rollback any changes in event of an error
+	$sql = "BEGIN";
+	$db->query($sql);
+
+	// insert into Resident
+	// prepared statement
+	$stmt = $db->prepare("INSERT INTO Resident (ResidentID, FirstName, LastName, Medicare, DOB) 
+		VALUES (:ResidentID, :FirstName, :LastName, :Medicare, :DOB)");
+	
+	//bind parameters
+	$stmt->bindParam(':ResidentID', $residentid);
+	$stmt->bindParam(':FirstName', $firstname);
+	$stmt->bindParam(':LastName', $lastname);
+	$stmt->bindParam(':Medicare', $medicare);
+	$stmt->bindParam(':DOB', $dob);
+	
+	//execute query
+	$success = $stmt->execute();
+
+	// get the PK for newly created record
+	$id = $db->lastInsertId();
+
+	// insert details into ResidentHome
+	$stmt = $db->prepare("INSERT INTO ResidentHome (ResidentID, RACID, AdminDate)
+		VALUES (:ResidentID, :RACID, :AdminDate)");
+	$stmt->bindParam(':ResidentID', $id);
+	$stmt->bindParam(':RACID', $facility);
+	$stmt->bindParam(':AdminDate', $admission);
+	$success = $stmt->execute();
+
+	$sql = "COMMIT";
+	$db->query($sql);
+
+	return array($success, $id);
 }
 
 ?>

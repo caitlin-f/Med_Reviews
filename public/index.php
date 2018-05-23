@@ -19,8 +19,6 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 	width: 100%; 
 	height: auto;
 	z-index: -1;">
-	<!-- <img src="<?php echo WWW_ROOT. '/img/longlogo.png'; ?>" style="height:150px; display: block; -->
-    <!-- margin: 0 auto;"> -->
 </div>
 
 <div id="content" class="grid-content">
@@ -28,7 +26,7 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 	
 	<div class="left2">
 		RESIDENTS<br><br>
-		<form method="post" class="front_page" id="resident_search" autocomplete="off" action="<?php echo url_to('/all_residents/index.php'); ?>">
+		<form method="post" class="front_page" id="resident_search" autocomplete="on" action="<?php echo url_to('/all_residents/index.php'); ?>">
 
 			<input class="front_input" list="last_names" id="last_name" name="lastname" placeholder="Last Name" onblur="update_firstnames(this.value);" autocomplete="off">
 					<?php $lastname_string = lastname_options($resident_data); ?>
@@ -75,8 +73,8 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 			<input class="submit" type="submit" value="Search">
 		</form>
 		</form>
-		<form method="post" class="front_page" id="new_resident" action="">
-			<input class="centre" type="submit" value="Enter New Resident">
+		<form method="get" class="front_page" id="new_resident" action="<?php echo url_to('/all_residents/insert_new_resident.php'); ?>">
+			<input class="front_centre" type="submit" value="Enter New Resident">
 		</form>
 
 	</div>
@@ -159,17 +157,55 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 	</div>
 	
 	<div class="right1">
-		REPORTS <br><br><br>
+		REPORTS<br><br>
+		<ul class="menu">
+		<li>
+			<input class="reports" id="due" type="checkbox" name="menu">
+			<label class="front" for="due">Drug Use Evaluations</label>
+				<ul class="submenu">
+					<li><a href="<?php echo url_to('/reporting/antipsychotics.php'); ?>">Antipsychotic usage</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="menu">	
+		<li>
+			<input class="reports" id="pharm" type="checkbox" name="menu">
+			<label class="front" for="pharm">Pharmacist Reports&nbsp;&nbsp;&nbsp;</label>
+				<ul class="submenu">
+					<li><a href="<?php echo url_to('/reporting/reviews_completed.php'); ?>">Reports all completed</a></li>
+					<li><a href="<?php echo url_to('/reporting/reviews_not_completed.php'); ?>">Reports not completed</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="menu">	
+		<li>
+			<input class="reports" id="doc" type="checkbox" name="menu">
+			<label class="front" for="doc">Doctor Reports&nbsp;&nbsp;&nbsp;</label>
+				<ul class="submenu">
+					<li><a href="<?php echo url_to('/reporting/doctors_email.php'); ?>">Doctor emails</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="menu">	
+		<li>
+			<input class="reports" id="fac" type="checkbox" name="menu">
+			<label class="front" for="fac">Facility Reports&nbsp;&nbsp;&nbsp;</label>
+				<ul class="submenu">
+					<li><a href="<?php echo url_to('/reporting/managers_email.php'); ?>">Manager emails</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="menu">	
+			<li>
+				<input class="reports" id="res" type="checkbox" name="menu">
+				<label class="front" for="res">Resident Reports&nbsp;&nbsp;&nbsp;</label>
+					<ul class="submenu">
+						<li><a href="<?php echo url_to('/reporting/residents_without_reviews.php'); ?>">To be reviewed</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 
-		<form method="post" class="front_page" id="reports" autocomplete="off" action="<?php echo url_to('/due/index.php'); ?>">
-			<input class="centre" type="submit" value="Drug Use Evaluations">
-			<input class="centre" type="submit" value="Pharmacist Reports">
-			<input class="centre" type="submit" value="Doctor Reports">
-		</form>
-
-
-
-	</div>
 	
 	<div class="right2"></div>
 

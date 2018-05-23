@@ -23,7 +23,7 @@ function u($string="") {
 function resident_options($all_residents) {
 	$option_string = '';
 	foreach($all_residents as $resident) {
-		$option_string .='<option data-value= "'.$resident["ResidentID"].'">'.$resident["LastName"].' '.$resident["FirstName"].'</option>';
+		$option_string .='<option value="'.$resident["ResidentID"]. '">'.$resident["LastName"].' '.$resident["FirstName"].'</option>';
 	}
 	return $option_string;
 }
@@ -31,7 +31,7 @@ function resident_options($all_residents) {
 function lastname_options($all_residents) {
 	$option_string = '';
 	foreach($all_residents as $resident) {
-		$option_string .='<option data-value= "'.$resident["LastName"].'">'.$resident["LastName"].'</option>';
+		$option_string .='<option value="'.$resident["LastName"]. '">'.$resident["LastName"].'</option>';
 	}
 	return $option_string;
 }
@@ -39,7 +39,7 @@ function lastname_options($all_residents) {
 function firstname_options($all_residents) {
 	$option_string = '';
 	foreach($all_residents as $resident) {
-		$option_string .='<option data-value= "'.$resident["ResidentID"].'">'.$resident["FirstName"].'</option>';
+		$option_string .='<option value="'.$resident["ResidentID"]. '">'.$resident["FirstName"].'</option>';
 	}
 	return $option_string;
 }
@@ -47,7 +47,15 @@ function firstname_options($all_residents) {
 function organisation_options($all_facilities) {
 	$option_string = '';
 	foreach($all_facilities as $facility) {
-		$option_string .='<option data-value "'.$facility["Organisation"]. '">'.$facility["Organisation"].'</option>';
+		$option_string .='<option value="'.$facility["Organisation"]. '">'.$facility["Organisation"].'</option>';
+	}
+	return $option_string;
+}
+
+function facility_options($all_facilities, $selected) {
+	$option_string = '';
+	foreach($all_facilities as $facility) {
+		$option_string .='<option value="'.$facility["RACID"].'">'.$facility["Name"].', '.$facility["Suburb"].'</option>';
 	}
 	return $option_string;
 }
@@ -55,7 +63,7 @@ function organisation_options($all_facilities) {
 function clinic_options($all_clinics) {
 	$option_string = '';
 	foreach($all_clinics as $clinic) {
-		$option_string .='<option data-value "'.$clinic["Name"]. '">'.$clinic["Name"].'</option>';
+		$option_string .='<option value="'.$clinic["Name"]. '">'.$clinic["Name"].'</option>';
 	}
 	return $option_string;
 }
@@ -98,6 +106,14 @@ function medication_string($medications) {
 	return $medication_string;
 }
 
+// displays an alert depending on true/false boolean
+function insert_success($success, $msg) {
+	if ($success == true) {
+		echo "<script type='text/javascript'> alert ('New Record Inserted Successfully');</script>";
+	} else {
+		echo "<script type = 'text/javascript'> alert ('Unsuccessful Insert : ".$msg."');</script>";
+	}
+}
 ?>
 
 <script>
@@ -109,7 +125,4 @@ function get_datalist_value(resident_input, resident_name) {
 	return return_value;
 }
 
-
-
-</script>
 </script>

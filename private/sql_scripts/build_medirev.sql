@@ -1,4 +1,168 @@
 /*
+source /path/to/med_reviews/private/sql_scripts/SQL_DDL.sql;
+*/
+DROP TABLE IF EXISTS Recommendation;
+DROP TABLE IF EXISTS ResidentDx;
+DROP TABLE IF EXISTS ResidentHome;
+DROP TABLE IF EXISTS ResidentRx;
+DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS Doctor;
+DROP TABLE IF EXISTS Topical;
+DROP TABLE IF EXISTS Injectable;
+DROP TABLE IF EXISTS Oral;
+DROP TABLE IF EXISTS Diagnosis;
+DROP TABLE IF EXISTS Medication;
+DROP TABLE IF EXISTS Facility;
+DROP TABLE IF EXISTS Resident;
+DROP TABLE IF EXISTS Clinic;
+DROP TABLE IF EXISTS Pharmacist;
+/* 
+
+Tables not referenced by any other 
+
+*/
+CREATE TABLE Pharmacist(
+	PharmID INT NOT NULL AUTO_INCREMENT,
+	FirstName VARCHAR(255) NOT NULL,
+	LastName VARCHAR(255) NOT NULL,
+	RegistrationNumber VARCHAR(255) NOT NULL UNIQUE,
+	RegistrationExpiry DATE NOT NULL,
+	AccreditationNumber VARCHAR(255) NOT NULL UNIQUE,
+	AccreditationExpiry DATE NOT NULL,
+	Phone INT(20),
+	Email VARCHAR(255),
+	PRIMARY KEY (PharmID)
+);
+CREATE TABLE Clinic(
+	ClinicID INT NOT NULL AUTO_INCREMENT,
+	Name VARCHAR(255) NOT NULL,
+	ManagerFirstName VARCHAR(255),
+	ManagerLastName VARCHAR(255),
+	Email VARCHAR(255),
+	Phone INT(12),
+	StreetAddress VARCHAR(255),
+	Suburb VARCHAR(255),
+	State VARCHAR(255),
+	PostCode SMALLINT,
+	PRIMARY KEY (ClinicID)
+);
+CREATE TABLE Resident(
+	ResidentID INT NOT NULL AUTO_INCREMENT,
+	FirstName VARCHAR(255) NOT NULL,
+	LastName VARCHAR(255) NOT NULL,
+	Medicare VARCHAR(255),
+	DOB DATE,
+	PRIMARY KEY (ResidentID)
+);
+CREATE TABLE Facility(
+	RACID INT NOT NULL,
+	Organisation VARCHAR(255),
+	Name VARCHAR(255),
+	Phone VARCHAR(255),
+	BedNumber INT,
+	Email VARCHAR(255),
+	CCFirstName VARCHAR(255),
+	CCLastName VARCHAR(255),
+	StreetAddress VARCHAR(255),
+	Suburb VARCHAR(20),
+	State VARCHAR(255),
+	PostCode SMALLINT,
+	PRIMARY KEY (RACID)
+);
+CREATE TABLE Medication(
+	MedID INT NOT NULL AUTO_INCREMENT,
+	GenericName VARCHAR(255) NOT NULL,
+	Class VARCHAR(255),
+	Strength VARCHAR(255),
+	PRIMARY KEY (MedID)
+);
+CREATE TABLE Diagnosis(
+	Disease VARCHAR(255) NOT NULL,
+	PRIMARY KEY (Disease)
+);
+/* 
+
+Tables with Foreign keys 
+
+*/
+/* Medications subclasses */
+CREATE TABLE Oral(
+	Formulation VARCHAR(255) NOT NULL,
+	MedID INT NOT NULL,
+	PRIMARY KEY (MedID),
+	FOREIGN KEY (MedID) REFERENCES Medication (MedID) ON DELETE CASCADE
+);
+CREATE TABLE Injectable(
+	Administration VARCHAR(255) NOT NULL,
+	MedID INT NOT NULL,
+	PRIMARY KEY (MedID),
+	FOREIGN KEY (MedID) REFERENCES Medication (MedID) ON DELETE CASCADE
+);
+CREATE TABLE Topical(
+	Formulation VARCHAR(255) NOT NULL,
+	MedID INT NOT NULL,
+	PRIMARY KEY (MedID),
+	FOREIGN KEY (MedID) REFERENCES Medication (MedID) ON DELETE CASCADE
+);
+CREATE TABLE Doctor(
+	DoctorID INT NOT NULL AUTO_INCREMENT,
+	ClinicID INT NOT NULL,
+	FirstName VARCHAR(255) NOT NULL,
+	LastName VARCHAR(255) NOT NULL,
+	ProviderNumber VARCHAR(255) UNIQUE,
+	PersonalEmail VARCHAR(255),
+	PRIMARY KEY (DoctorID),
+	FOREIGN KEY (ClinicID) REFERENCES Clinic (ClinicID)
+);
+CREATE TABLE Review(
+	RevID INT NOT NULL AUTO_INCREMENT,
+	DoctorID INT NOT NULL,
+	PharmID INT,
+	ResidentID INT NOT NULL,
+	ReferralDate DATE NOT NULL,
+	ReviewDate DATE,
+	PRIMARY KEY (RevID),
+	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID) ON DELETE CASCADE,
+	FOREIGN KEY (DoctorID) REFERENCES Doctor (DoctorID),
+	FOREIGN KEY (PharmID) REFERENCES Pharmacist (PharmID)
+);
+/* Many to Many Review/Medication intermediate table */
+CREATE TABLE ResidentRx(
+	RevID INT NOT NULL,
+	MedID INT NOT NULL,
+	Frequency VARCHAR(255),
+	Dose VARCHAR(255),
+	PRIMARY KEY (RevID, MedID),
+	FOREIGN KEY (RevID) REFERENCES Review (RevID) ON DELETE CASCADE,
+	FOREIGN KEY (MedID) REFERENCES Medication (MedID)
+);
+/* Many to Many Resident/Facility intermediate table */
+CREATE TABLE ResidentHome(
+	ResidentID INT NOT NULL,
+	RACID INT NOT NULL,
+	AdminDate DATE,
+	PRIMARY KEY (ResidentID, RACID),
+	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID) ON DELETE CASCADE,
+	FOREIGN KEY (RACID) REFERENCES Facility (RACID)
+);
+/* Many to Many Resident/Diagnosis intermediate table */
+CREATE TABLE ResidentDx(
+	ResidentID INT NOT NULL,
+	Disease VARCHAR(255) NOT NULL,
+	PRIMARY KEY (ResidentID, Disease),
+	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID) ON DELETE CASCADE,
+	FOREIGN KEY (Disease) REFERENCES Diagnosis (Disease)
+);
+CREATE TABLE Recommendation(
+	Title VARCHAR(255) NOT NULL,
+	RevID INT NOT NULL,
+	Information TEXT,
+	Options VARCHAR(255),
+	PRIMARY KEY (Title, RevID),
+	FOREIGN KEY (RevID) REFERENCES Review (RevID) ON DELETE CASCADE
+);
+SHOW TABLES;
+/*
 source /path/to/med_reviews/private/sql_scripts/INSERT_SQL.sql;
 */
 # Pharmacist
@@ -26,11 +190,11 @@ INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Anna-Marie', 
 INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Milan', 'Bateman', '40099999990', '1927-10-09');
 INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Travis', 'Driscoll', '40012121210', '1922-05-23');
 # Facility
-INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'FirstName', 'LastName', '1 Facility St', 'Yeronga', 'QLD', 4103);
-INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'FirstName', 'LastName', '2 Facility St', 'Bulimba', 'QLD', 4002);
-INSERT INTO Facility VALUES (3333,'Bolton Clarke', 'Milford Grange', '0733896500', 150, 'milford@boltonclarke.com', 'FirstName', 'LastName', '3 Facility St', 'Eastern Heights', 'QLD', 4403);
-INSERT INTO Facility VALUES (4444,'Churches of Christ', 'Milford Grange', '0733896500', 80, 'milford@boltonclarke.com', 'FirstName', 'LastName', '4 Facility St', 'Eastern Heights', 'QLD', 4403);
-INSERT INTO Facility VALUES (5555,'Churches of Christ', 'Bribie Island Aged Care', '0738886577', 80, 'bribie@cofc.com', 'FirstName', 'LastName', '5 Facility St', 'Bongaree', 'QLD', 4507);
+INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'Don', 'Brown', '1 Facility St', 'Yeronga', 'QLD', 4103);
+INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'Mercy', 'May', '2 Facility St', 'Bulimba', 'QLD', 4002);
+INSERT INTO Facility VALUES (3333,'Bolton Clarke', 'Milford Grange', '0733896500', 150, 'milford@boltonclarke.com', 'Gift', 'Zella', '3 Facility St', 'Eastern Heights', 'QLD', 4403);
+INSERT INTO Facility VALUES (4444,'Bolton Clarke', 'Tantula Rise', '0732054456', 80, 'tantula@boltonclarke.com', 'Cindy', 'Mac', '4 Facility St', 'Alexandra Headland', 'QLD', 4572);
+INSERT INTO Facility VALUES (5555,'Churches of Christ', 'Bribie Island Aged Care', '0738886577', 80, 'bribie@cofc.com', 'Kim', 'Harris', '5 Facility St', 'Bongaree', 'QLD', 4507);
 # Medications
 INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Frusemide', 'Diuretic', '40mg');
 INSERT INTO Medication (GenericName, Class, Strength) VALUES ('Diltiazem', 'Calcium Channel Blocker', '180mg');

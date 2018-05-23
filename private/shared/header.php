@@ -23,7 +23,29 @@
 			<div class="nav5">
 			<a href="<?php echo url_to('/all_doctors/index.php'); ?>">DOCTORS</a></div>
 			<div class="nav6">
-			<a href="<?php echo url_to('/due/index.php'); ?>">REPORTS</a></div>
+				<ul class="nav">
+				<li>
+					<input class="reports" id="all_reports" type="checkbox" name="menu">
+					<label class="nav" for="all_reports">REPORTS</label>
+						<ul class="submenu" id="nav">
+							<li><p class="submenu">Drug use evaluations</p></li>
+							<li><a href="<?php echo url_to('/reporting/antipsychotics.php'); ?>">Antipsychotic usage</a></li>
+
+							<li><p class="submenu">Pharmacist Reports</p></li>
+							<li><a href="<?php echo url_to('/reporting/reviews_completed.php'); ?>">Reports all completed</a></li>
+							<li><a href="<?php echo url_to('/reporting/reviews_not_completed.php'); ?>">Reports not completed</a></li>
+
+							<li><p class="submenu">Doctor Reports</p></li>
+							<li><a href="<?php echo url_to('/reporting/doctors_email.php'); ?>">Doctor emails</a></li>
+
+							<li><p class="submenu">Facility Reports</p></li>
+							<li><a href="<?php echo url_to('/reporting/managers_email.php'); ?>">Manager emails</a></li>
+
+							<li><p class="submenu">Resident Reports</p></li>
+							<li><a href="<?php echo url_to('/reporting/residents_without_reviews.php'); ?>">To be reviewed</a></li>
+						</ul>
+				</li>
+			</div>
 		</div>
 	</nav>
 
