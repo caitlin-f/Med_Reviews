@@ -37,7 +37,7 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 					</script>
 
 	
-			<input class="front_input" list="first_names" id="first_name" name="firstname" placeholder="First Name" type="text" onblur="update_facilities(this.value, last_name.value);" autocomplete="off">
+			<input class="front_input" list="first_names" id="first_name" name="firstname" placeholder="First Name" type="text" onblur="" autocomplete="off">
 					<datalist id="first_names"><option></option></datalist>
 					<script language="javascript">
 						function update_firstnames(value) {
@@ -45,16 +45,20 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 							var residents = <?php echo json_encode($resident_data);?>;
 							console.log(value) // error checking
 							var firstname_options = ""
+							var firstnames = new Set();
 							for (idx in residents) {
 								if (residents[idx].LastName == value)
-									firstname_options += "<option>" + residents[idx].FirstName + "</option>"
+									firstnames.add(residents[idx].FirstName);
+							}
+							for (let firstname of firstnames) {
+								firstname_options += "<option>" + firstname + "</option>"
 							}
 							console.log(firstname_options) // error checking
 							firstname_list.innerHTML = firstname_options
 						}
 					</script>
 
-			<input class="front_input" list="facilities" id="facility" name="facility" placeholder="All Facilities" autocomplete="off">
+			<input class="front_input" list="facilities" id="facility" name="facility" placeholder="All Facilities" onfocus="update_facilities(first_name.value, last_name.value);" autocomplete="off">
 					<datalist id="facilities"><option></option></datalist>
 					<script language="javascript">
 						function update_facilities(firstname, lastname) {
@@ -62,16 +66,37 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 							var residents = <?php echo json_encode($resident_data);?>;
 							console.log(firstname, lastname) // error checking
 							var facility_options = ""
-							for (idx in residents) {
+							var facilities = new Set();
+							if (firstname.length == 0 && lastname.length == 0) {
+								for (idx in residents) {
+									facilities.add(residents[idx].Name);
+								}
+							} else if (firstname.length == 0) {
+								for (idx in residents) {
+									if (residents[idx].LastName == lastname) {
+										facilities.add(residents[idx].Name);
+									}
+								}
+							} else if (lastname.length == 0) {
+								for (idx in residents) {
+									if (residents[idx].FirstName == firstname) {
+										facilities.add(residents[idx].Name);
+									}
+								}
+							} else {
+								for (idx in residents) {
 								if (residents[idx].FirstName == firstname && residents[idx].LastName == lastname)
-									facility_options += "<option>" + residents[idx].Name + "</option>"
+									facilities.add(residents[idx].Name);
 							}
-							console.log(facility_options)
-							facility_list.innerHTML = facility_options
+							} 
+							for (let facility of facilities) {
+								facility_options += "<option>" + facility + "</option>"
+							}
+							console.log(facility_options); // error checking
+							facility_list.innerHTML = facility_options;
 						}
 					</script>
 			<input class="submit" type="submit" value="Search">
-		</form>
 		</form>
 		<form method="get" class="front_page" id="new_resident" action="<?php echo url_to('/all_residents/insert_new_resident.php'); ?>">
 			<input class="front_centre" type="submit" value="Enter New Resident">
@@ -174,6 +199,9 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 				<ul class="submenu">
 					<li><a href="<?php echo url_to('/reporting/reviews_completed.php'); ?>">Reports all completed</a></li>
 					<li><a href="<?php echo url_to('/reporting/reviews_not_completed.php'); ?>">Reports not completed</a></li>
+					<li><a href="<?php echo url_to('/reporting/pharm_max.php'); ?>">Highest review counts</a></li>
+					<li><a href="<?php echo url_to('/reporting/pharm_min.php'); ?>">Lowest review counts</a></li>
+					<li><a href="<?php echo url_to('/reporting/pharm_avg.php'); ?>">Average review counts</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -192,6 +220,7 @@ $clinic_data = get_all_clinics_doctors($wd, $wd, $wd);
 			<label class="front" for="fac">Facility Reports&nbsp;&nbsp;&nbsp;</label>
 				<ul class="submenu">
 					<li><a href="<?php echo url_to('/reporting/managers_email.php'); ?>">Manager emails</a></li>
+					<li><a href="<?php echo url_to('/reporting/facility_stats.php'); ?>">Bed number stats</a></li>
 				</ul>
 			</li>
 		</ul>

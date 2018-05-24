@@ -4,7 +4,7 @@
 
 <head>
 	<title><?php echo $page_title; ?></title>
-	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
 	<link rel="stylesheet" media="all" href="<?php echo WWW_ROOT . '/stylesheets/home.css'; ?>" />
 </head>
 
@@ -34,12 +34,16 @@
 							<li><p class="submenu">Pharmacist Reports</p></li>
 							<li><a href="<?php echo url_to('/reporting/reviews_completed.php'); ?>">Reports all completed</a></li>
 							<li><a href="<?php echo url_to('/reporting/reviews_not_completed.php'); ?>">Reports not completed</a></li>
+							<li><a href="<?php echo url_to('/reporting/pharm_max.php'); ?>">Highest review counts</a></li>
+							<li><a href="<?php echo url_to('/reporting/pharm_min.php'); ?>">Lowest review counts</a></li>
+							<li><a href="<?php echo url_to('/reporting/pharm_avg.php'); ?>">Average review counts</a></li>
 
 							<li><p class="submenu">Doctor Reports</p></li>
 							<li><a href="<?php echo url_to('/reporting/doctors_email.php'); ?>">Doctor emails</a></li>
 
 							<li><p class="submenu">Facility Reports</p></li>
 							<li><a href="<?php echo url_to('/reporting/managers_email.php'); ?>">Manager emails</a></li>
+							<li><a href="<?php echo url_to('/reporting/facility_stats.php'); ?>">Bed number stats</a></li>
 
 							<li><p class="submenu">Resident Reports</p></li>
 							<li><a href="<?php echo url_to('/reporting/residents_without_reviews.php'); ?>">To be reviewed</a></li>

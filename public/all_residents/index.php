@@ -24,6 +24,7 @@
 					<th>Medicare</th>
 					<th>DOB</th>
 					<th>&nbsp;</th>
+					<th>&nbsp;</th>
 				</tr>
 				<?php foreach($all_residents as $resident) { ?>
 					<tr>
@@ -34,6 +35,12 @@
 						<td><?php echo h($resident['Medicare']); ?></td>
 						<td><?php echo h($resident['DOB']); ?></td>
 						<td><a class="action" href="<?php echo url_to('/all_residents/resident/view.php?id='.h(u($resident['ResidentID'])));?>">View</a></td>
+						<td>
+							<form method="post" action="delete_resident.php">
+								<input type="hidden" name="residentID" id="residentID" value=<?php echo h($resident['ResidentID']); ?>>
+								<input class="link" type="submit" value="Delete">
+							</form>
+						</td>
 					</tr>
 				<?php } ?>
 			</table>

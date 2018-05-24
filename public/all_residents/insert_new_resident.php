@@ -8,8 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$admission = $_POST["Admission"];
 	try {
 		$success = insert_new_resident($firstname, $lastname, $medicare, $dob, $facility, $admission);
-		echo $success[0];
-		echo $success[1];
 		insert_success($success[0], "");
 		// redirect to resident view page upon successful insertion
 		echo '<script> window.location.href = "'.url_to('/all_residents/resident/view.php?id='.h(u($success[1]))).'";</script>';
@@ -68,7 +66,7 @@ $facility_string = facility_options($all_facilities, $facility);
 					<td><input class="insert" type="datetime" name="Admission" id="Admission" value='<?php echo $admission; ?>'></td>
 				</tr>
 			</table>
-			<input class="submit" type="submit" value="Submit" /></td>
+			<input class="submit" type="submit" value="Submit"/>
 		</form>
 	</article>
 </div>

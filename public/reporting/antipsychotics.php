@@ -9,7 +9,7 @@
 
 <div id="main">
 	<?php
-echo "<table style='border: ;'>";
+echo '<table class="list" style="border: ;">';
 echo '<tr><th colspan="2">Resident</th><th colspan="2">Pharmacist</th><th colspan="2">Doctor</th><th>Referral Date</th><th>Review Date</th><th>Medication Class</th>';
 
 cLass TableRows extends RecursiveIteratorIterator {

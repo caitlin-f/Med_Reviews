@@ -28,19 +28,30 @@ function resident_options($all_residents) {
 	return $option_string;
 }
 
+// get unique lastnames and build an <option></option> string
 function lastname_options($all_residents) {
 	$option_string = '';
+	$lastnames = array();
 	foreach($all_residents as $resident) {
-		$option_string .='<option value="'.$resident["LastName"]. '">'.$resident["LastName"].'</option>';
+		array_push($lastnames, $resident["LastName"]);
+	}
+	foreach(array_unique($lastnames) as $lastname) {
+		$option_string .='<option value="'.$lastname. '">'.$lastname.'</option>';
 	}
 	return $option_string;
 }
 
 function firstname_options($all_residents) {
 	$option_string = '';
+	$firstnames = array();
 	foreach($all_residents as $resident) {
-		$option_string .='<option value="'.$resident["ResidentID"]. '">'.$resident["FirstName"].'</option>';
+		array_push($firstnames, $resident["FirstName"]);
 	}
+	print_r(array_unique($firstnames));
+	foreach(array_unique($firstnames) as $firstname) {
+		$option_string .='<option value="'.$firstname. '">'.$firstname.'</option>';
+	}
+	print_r($option_string);
 	return $option_string;
 }
 
@@ -97,7 +108,7 @@ function disease_string($diagnoses) {
 function medication_string($medications) {
 	$medication_string = '';
 	foreach($medications as $medication) {
-		$medication_string .= '<tr><td>'.$medication['GenericName'].'<td>';
+		$medication_string .= '<tr><td>'.$medication['GenericName'].'</td>';
 		$medication_string .= '<td>'.$medication['Form'].'</td>';
 		$medication_string .= '<td>'.$medication['Strength'].'</td>';
 		$medication_string .= '<td>'.$medication['Dose'].'</td>';
@@ -106,12 +117,22 @@ function medication_string($medications) {
 	return $medication_string;
 }
 
-// displays an alert depending on true/false boolean
+// displays an alert depending on true/false boolean for inserting resident
 function insert_success($success, $msg) {
 	if ($success == true) {
 		echo "<script type='text/javascript'> alert ('New Record Inserted Successfully');</script>";
 	} else {
 		echo "<script type = 'text/javascript'> alert ('Unsuccessful Insert : ".$msg."');</script>";
+	}
+}
+
+// displays alert depending on true.fase boolean for deleting resident
+function delete_success($success, $msg) {
+	echo "delete function";
+	if ($success == true) {
+		echo "<script type='text/javascript'> alert ('Record Deleted');</script>";
+	} else {
+		echo "<script type = 'text/javascript'> alert ('Unable to delete : ".$msg."');</script>";
 	}
 }
 ?>

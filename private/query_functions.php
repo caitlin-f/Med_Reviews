@@ -98,6 +98,18 @@ function get_all_clinics_doctors($firstname, $lastname, $clinic) {
 	 return $array;
 }
 
+// Get count of reviews a resident has had
+function get_num_reviews($id) {
+	global $db;
+
+	$sql = "SELECT COUNT(*)
+	 FROM Review
+	 WHERE ResidentID = $id";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
 // Get a diagnosis list for a specific resident by ResidentID
 function resident_Dx($id) {
 	global $db;
@@ -182,6 +194,80 @@ function get_recommendations($rev) {
 	return $array;
 }
 
+// get pharmacist with minimum number of reviews
+function get_pharm_min_reviews() {
+	global $db;
+
+	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
+		SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+		WHERE P.PharmID = y.PharmID 
+		AND y.num = (
+			SELECT MIN(x.num) FROM (
+				SELECT COUNT(*) as num FROM Review GROUP BY PharmID) as x);";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+// get pharmacist with maximum number of reviews
+function get_pharm_max_reviews() {
+	global $db;
+
+	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
+		SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+		WHERE P.PharmID = y.PharmID 
+		AND y.num = (
+			SELECT MAX(x.num) FROM (
+			SELECT COUNT(*) as num FROM Review GROUP BY PharmID) as x);";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+function get_pharm_avg_reviews() {
+	global $db;
+
+	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
+	SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+	WHERE P.PharmID = y.PharmID AND y.num = (
+	SELECT ROUND(AVG(x.num)) FROM (
+	SELECT COUNT(*) as num FROM Review GROUP BY PharmID) as x)";
+
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+// get maximum facility bed numbers
+function get_max_bed_num() {
+	global $db;
+
+	$sql = "SELECT MAX(BedNumber) AS max FROM facility";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+// get minimum facility bed numbers
+function get_min_bed_num() {
+	global $db;
+
+	$sql = "SELECT MIN(BedNumber) AS min FROM facility";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+// get average facility bed numbers
+function get_avg_bed_num() {
+	global $db;
+
+	$sql = "SELECT ROUND(AVG(BedNumber)) AS avg FROM facility";
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
 // insert a new resident and associate with a facility
 function insert_new_resident($firstname, $lastname, $medicare, $dob, $facility, $admission) {
 	global $db;
@@ -220,6 +306,14 @@ function insert_new_resident($firstname, $lastname, $medicare, $dob, $facility, 
 	$db->query($sql);
 
 	return array($success, $id);
+}
+
+// Attempt to delete a resident based on resident id
+function delete_resident($id) {
+	global $db;
+
+	$sql = "DELETE FROM Resident WHERE ResidentID = $id";
+	$db->query($sql);
 }
 
 ?>

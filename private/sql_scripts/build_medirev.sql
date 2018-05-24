@@ -114,6 +114,7 @@ CREATE TABLE Doctor(
 	PRIMARY KEY (DoctorID),
 	FOREIGN KEY (ClinicID) REFERENCES Clinic (ClinicID)
 );
+/* Check constraint, however, this is also checked using a before trigger when updating a review date in the gui application */
 CREATE TABLE Review(
 	RevID INT NOT NULL AUTO_INCREMENT,
 	DoctorID INT NOT NULL,
@@ -121,6 +122,7 @@ CREATE TABLE Review(
 	ResidentID INT NOT NULL,
 	ReferralDate DATE NOT NULL,
 	ReviewDate DATE,
+	CONSTRAINT CHK_Date CHECK (ReviewDate > ReferralDate),
 	PRIMARY KEY (RevID),
 	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID) ON DELETE CASCADE,
 	FOREIGN KEY (DoctorID) REFERENCES Doctor (DoctorID),
@@ -133,7 +135,7 @@ CREATE TABLE ResidentRx(
 	Frequency VARCHAR(255),
 	Dose VARCHAR(255),
 	PRIMARY KEY (RevID, MedID),
-	FOREIGN KEY (RevID) REFERENCES Review (RevID) ON DELETE CASCADE,
+	FOREIGN KEY (RevID) REFERENCES Review (RevID),
 	FOREIGN KEY (MedID) REFERENCES Medication (MedID)
 );
 /* Many to Many Resident/Facility intermediate table */

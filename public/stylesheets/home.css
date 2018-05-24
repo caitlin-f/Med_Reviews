@@ -258,6 +258,19 @@ input.front_centre {
   height:2.3em;
 }
 
+input.link {
+  border: none;
+  position: relative;
+  text-align: center;
+  padding: 0px;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  font-size: 16px;
+  font-family: Times New Roman;
+  text-decoration: underline;
+  color: red;
+  cursor: pointer;}
+}
 
 form.front_page {
   padding: 0 0 0 0;
@@ -287,6 +300,24 @@ table.list tr td {
   border: 1px solid #081423;
 }
 
+table.resident_form {
+  border: 1px solid #081423;
+}
+
+table.resident_form tr td {
+  border-top: 1px solid #081423;
+}
+
+td.head {
+  color: #5C697B;
+  text-align: right;
+}
+
+td.info {
+  text-align:center;
+  border-right: 1px solid #081423;
+}
+
 th {
   padding: 4 10 4 10;
 }
@@ -300,6 +331,9 @@ table.insert {
   line-height: 1.8em;
 }
 
+p.resident_form {
+  font-size: 17px;
+}
 
 
 /* DropDown */
@@ -417,7 +451,7 @@ input.reports{
 
 /* show submenu when checked */
 input.reports:checked ~ ul.submenu{
-  max-height:500px;
+  max-height:1000px;
   transition:max-height 0.5s ease-in;
   display:block;
 }
