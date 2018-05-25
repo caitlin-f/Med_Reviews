@@ -21,7 +21,7 @@ $num_reviews = get_num_reviews($id);
 		<a class="back-link" href="<?php echo url_to('/all_residents/index.php'); ?>">&laquo; Residents List</a>
 
 		<section id="resident_details">
-			<p class="resident_form">Resident Details: <a class="action" href="">Edit</a></p>
+			<p class="resident_form">Resident Details:</p>
 			<table class="resident_form">
 			<tr>
 				<td class="head">Name:</td>
@@ -43,7 +43,7 @@ $num_reviews = get_num_reviews($id);
 		</section>
 
 		<section id="diagnosis">
-			<p class="resident_form">Diagnoses: <a class="action" href="">Edit</a></p></p>
+			<p class="resident_form">Diagnoses:</p>
 			<table class="resident_form">
 				<?php echo disease_string($diagnoses); ?>
 			</table>

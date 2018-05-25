@@ -242,7 +242,11 @@ input.submit {
   height: 2em;
 }
 
-input.submit:hover, .front_centre:hover{
+input.submit:hover {
+  box-shadow:0px 0px 5px 2px rgba(27,153,232,1);
+}
+
+input.front_centre:hover {
   box-shadow:0px 0px 5px 2px rgba(27,153,232,1);
 }
 
@@ -262,7 +266,7 @@ input.link {
   border: none;
   position: relative;
   text-align: center;
-  padding: 0px;
+  padding: 0 10px 0 10px;
   margin-top: 5px;
   margin-bottom: -10px;
   font-size: 16px;
@@ -547,6 +551,12 @@ form.insert_resident {
 
 input.insert {
   width: 300px;
+  padding: 3px;
+  font-size: 14px;
+}
+
+input.edit {
+  width: 120px;
   padding: 3px;
   font-size: 14px;
 }

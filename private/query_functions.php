@@ -162,7 +162,19 @@ function resident_Rx($rev) {
 	return $array;
 }
 
-// Get details including doctors= and pharmacist names for all the reviews a resident has received
+// Get referral and review dates
+function get_rev_dates($rev) {
+	global $db;
+
+	$sql = "SELECT ReferralDate, ReviewDate
+	 FROM Review
+	 WHERE RevID = $rev";
+
+	$result = $db->query($sql);
+	$array = $result->fetch(PDO::FETCH_ASSOC);
+	return $array;
+}
+// Get details including doctors and pharmacist names for all the reviews a resident has received
 function all_resident_reviews($id) {
 	global $db;
 
@@ -199,7 +211,7 @@ function get_pharm_min_reviews() {
 	global $db;
 
 	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
-		SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+		SELECT PharmID, COUNT(*) as num FROM Review group by PharmID) as y 
 		WHERE P.PharmID = y.PharmID 
 		AND y.num = (
 			SELECT MIN(x.num) FROM (
@@ -214,7 +226,7 @@ function get_pharm_max_reviews() {
 	global $db;
 
 	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
-		SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+		SELECT PharmID, COUNT(*) as num FROM Review group by PharmID) as y 
 		WHERE P.PharmID = y.PharmID 
 		AND y.num = (
 			SELECT MAX(x.num) FROM (
@@ -224,11 +236,12 @@ function get_pharm_max_reviews() {
 	return $array;
 }
 
+// get pharmacists with the average numbers of reviews
 function get_pharm_avg_reviews() {
 	global $db;
 
 	$sql = "SELECT P.FirstName, P.LastName, y.num FROM Pharmacist P, (
-	SELECT PharmID, COUNT(*) as num FROM review group by PharmID) as y 
+	SELECT PharmID, COUNT(*) as num FROM Review group by PharmID) as y 
 	WHERE P.PharmID = y.PharmID AND y.num = (
 	SELECT ROUND(AVG(x.num)) FROM (
 	SELECT COUNT(*) as num FROM Review GROUP BY PharmID) as x)";
@@ -314,6 +327,85 @@ function delete_resident($id) {
 
 	$sql = "DELETE FROM Resident WHERE ResidentID = $id";
 	$db->query($sql);
+}
+
+// Update a review date, ensuring that the review date is after the referral date
+// check is done at this level aswell in the case that the check constraint is not performed depending on the mysql version
+function update_review_date($revID, $revDate, $refDate) {
+	global $db;
+
+	$dateRev = strtotime($revDate);
+	$dateRef = strtotime($refDate);
+
+	if ($dateRev > $dateRef) {
+		try {
+			$sql = "BEGIN";
+		$db->query($sql);
+
+		$stmt = $db->prepare("UPDATE Review 
+			SET ReviewDate = :revDate
+			WHERE RevID = :revID");
+
+		$stmt->bindParam(':revDate', $revDate);
+		$stmt->bindParam(':revID', $revID);
+
+		$success = $stmt->execute();
+
+		$sql = "COMMIT";
+		$db->query($sql);
+
+		return array($success, "");
+
+		} catch (PDOException $e) {
+			return array(false, $e->getMessage());
+		}
+
+	} else if ($dateRev < $dateRef) {
+		return array(false, "Review date must be after referral date");
+	}
+}
+
+// get all medications
+function get_all_medications() {
+	global $db;
+
+	$sql = "SELECT Med.*, COALESCE(O.Formulation, T.Formulation, I.Administration) AS Form
+	FROM Medication Med
+	 LEFT JOIN Oral O ON O.MedID = Med.MedID
+	 LEFT JOIN Topical T ON T.MedID = Med.MedID
+	 LEFT JOIN Injectable I ON I.MedID = Med.MedID";
+
+	$result = $db->query($sql);
+	$array = $result->fetchALL(PDO::FETCH_ASSOC);
+	return $array;
+}
+
+// insert a new medication into a residents Rx for a specific review
+function insert_new_medication($revID, $medID, $freq, $dose) {
+	global $db;
+
+	// use "BEGIN" and "COMMIT" clause to rollback any changes in event of an error
+	$sql = "BEGIN";
+	$db->query($sql);
+
+	// insert into Resident
+	// prepared statement
+	$stmt = $db->prepare("INSERT INTO ResidentRx
+		VALUES (:RevID, :MedID, :Frequency, :Dose)");
+	
+	//bind parameters
+	$stmt->bindParam(':RevID', $revID);
+	$stmt->bindParam(':MedID', $medID);
+	$stmt->bindParam(':Frequency', $freq);
+	$stmt->bindParam(':Dose', $dose);
+	
+	//execute query
+	$success = $stmt->execute();
+
+	$sql = "COMMIT";
+	$db->query($sql);
+
+	return $success;
 }
 
 ?>

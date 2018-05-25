@@ -33,7 +33,7 @@ cLass TableRows extends RecursiveIteratorIterator {
 
 try {
 	$conn = db_connect();
-	$stmt = $conn-> prepare("SELECT CCFirstName, CCLastName, Email FROM facility;");
+	$stmt = $conn-> prepare("SELECT CCFirstName, CCLastName, Email FROM Facility;");
 	$stmt ->execute();
 
 	//set the resulting array to associative

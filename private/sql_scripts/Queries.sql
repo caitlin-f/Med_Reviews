@@ -51,4 +51,11 @@ SELECT Rev.RevID
 FROM Recommendation Rec
 WHERE Rev.RevID = Rec.RevID AND Rev.PharmID = P.PharmID));
 
+/* Find details of residents in antipsychotic table (have been on an antipsychotic at some point) */
+SELECT Res.FirstName, Res.LastName, Rev.ReviewDate, Med.GenericName 
+FROM Antipsychotic A, Review Rev, Resident Res, Medication Med 
+WHERE A.RevID = Rev.RevID 
+AND A.ResidentID = Res.ResidentID 
+AND A.MedID = Med.MedID;
+
 

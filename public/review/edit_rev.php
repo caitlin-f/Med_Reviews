@@ -1,14 +1,17 @@
 <?php require_once('../../private/init.php'); ?>
 <?php
 $get = explode(",", isset($_GET['id']) ? $_GET['id'] : "1,1");
-$id = $get[0]; // Resident.ResidentID
-$rev = $get[1]; // Review.RevID
+$id = $get[0];
+$rev = $get[1];
 
 $res_info = get_resident_info($id);
 $diagnoses = resident_Dx($id);
 $medications = resident_Rx($rev);
 $recommendations = get_recommendations($rev);
 $dates = get_rev_dates($rev);
+
+$all_medications = get_all_medications();
+$medication_options_string = medication_options_string($all_medications);
 ?>
 
 <?php $page_title = 'Residential Medication Management Review'; ?>
@@ -48,25 +51,37 @@ $dates = get_rev_dates($rev);
 
 		<section id="review_details">
 			<p>Review Details:</p>
+			<form method="post" action="process_edit.php">
 			<table class="resident_form">
 				<td class="head">Referral Date:</td>
 				<td class="info"><?php echo h($dates['ReferralDate']); ?></td>
 				<td class="head">Review Date:</td>
-				<td class="info"><?php echo h($dates['ReviewDate']); ?></td>
-				<td><a class="action" href="<?php echo url_to('/review/edit_rev.php?id='.h(u($id)).','.h(u($rev)));?>">Edit</a></td>
+				<td class="info">
+					<input class="edit" type="datetime" name="ReviewDate" id="ReviewDate" value='<?php echo h($dates['ReviewDate']);?>'>
+				</td>
+				<td>
+					<input type="hidden" name="RevID" id="RevID" value="<?php echo $rev ?>">
+					<input type="hidden" name="ReferralDate" id="ReferralDate" value="<?php echo h($dates['ReferralDate']); ?>">
+					<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+					<input class="link" type="submit" value="Save" style="color: blue; padding-bottom: 15px; background: none;">
+				</td>
 			</table>
+		</form>
 		</section>
 
 
 		<section id="diagnosis">
 			<p>Diagnoses:</p>
-			<table class="resident_form">
+			<table class="resident_form" action="process_edit.php">
 				<?php echo disease_string($diagnoses); ?>
 			</table>
 		</section>
 
 		<section id="medications">
-			<p>Current medications: <a class="action" href="<?php echo url_to('/review/edit_rev.php?id='.h(u($id)).','.h(u($rev)));?>">Add</a></p>
+			<form method="post" action="add_meds.php">
+			<p>Current medications: 
+				<input class="link" type="submit" value="Save" style="color: blue; padding-bottom: 15px; background: none;">
+				<input type="hidden" name="id" id="id" value="<?php echo $id ?>"></p>
 			<table class="list">
 				<tr>
 					<th>Medication</th>
@@ -76,7 +91,21 @@ $dates = get_rev_dates($rev);
 					<th>Frequency</th>
 				</tr>
 				<?php echo medication_string($medications); ?>
+				<td colspan="3">
+					<input type="hidden" name="RevID" id="RevID" value="<?php echo $rev ?>">
+					<select class="insert" name="medication"><option value="">Select Medication</option><?php echo $medication_options_string; ?>
+					</select>
+				</td>
+				<td>
+					<input class="edit" type="text" name="Dose" id="Dose">
+				</td>
+				<td>
+					<input class="edit" type="text" name="Frequency" id="Frequency">
+				</td>
 			</table>
+		</form>
+
+
 		</section>
 
 		<section id="reviews">

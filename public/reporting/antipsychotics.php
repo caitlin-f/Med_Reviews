@@ -10,7 +10,7 @@
 <div id="main">
 	<?php
 echo '<table class="list" style="border: ;">';
-echo '<tr><th colspan="2">Resident</th><th colspan="2">Pharmacist</th><th colspan="2">Doctor</th><th>Referral Date</th><th>Review Date</th><th>Medication Class</th>';
+echo '<tr><th colspan="2">Resident</th><th>Review Date</th><th>Medication</th>';
 
 cLass TableRows extends RecursiveIteratorIterator {
 	function __construct($it){
@@ -32,18 +32,11 @@ cLass TableRows extends RecursiveIteratorIterator {
 
 try {
      $conn = db_connect();
-	 $stmt = $conn-> prepare("SELECT Res.FirstName as ResFirst, Res.LastName as ResLast, P.FirstName as PFirst, P.LastName as PLast, D.FirstName as DFirst, D.LastName as DLast, Rev1.ReferralDate, Rev1.ReviewDate, Med.Class
-	 	FROM Review Rev1, ResidentRx Rx, Medication Med, Resident Res, Pharmacist P, Doctor D
-	 	WHERE Rev1.RevID = Rx.RevID 
-	 	AND Res.ResidentID = Rev1.ResidentID
-	 	AND P.PharmID = Rev1.PharmID
-	 	AND D.DoctorID = Rev1.DoctorID
-	 	AND Rx.MedID = Med.MedID 
-	 	AND Med.Class = 'Antipsychotic' 
-	 	AND Rev1.ReviewDate = (
-	 		SELECT MAX(ReviewDate)
-	 		FROM Review Rev2
-	 		WHERE Rev1.ResidentID = Rev2.ResidentID);");
+	 $stmt = $conn-> prepare("SELECT Res.FirstName, Res.LastName, Rev.ReviewDate, Med.GenericName 
+	 	FROM Antipsychotic A, Review Rev, Resident Res, Medication Med 
+	 	WHERE A.RevID = Rev.RevID 
+	 	AND A.ResidentID = Res.ResidentID 
+	 	AND A.MedID = Med.MedID;");
 	$stmt ->execute();
 
 	//set the resulting array to associative

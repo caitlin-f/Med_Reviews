@@ -1,6 +1,7 @@
 /*
-source /path/to/med_reviews/private/sql_scripts/SQL_DDL.sql;
+source /path/to/med_reviews/private/sql_scripts/build_medirev.sql;
 */
+DROP TABLE IF EXISTS Antipsychotic;
 DROP TABLE IF EXISTS Recommendation;
 DROP TABLE IF EXISTS ResidentDx;
 DROP TABLE IF EXISTS ResidentHome;
@@ -145,7 +146,7 @@ CREATE TABLE ResidentHome(
 	AdminDate DATE,
 	PRIMARY KEY (ResidentID, RACID),
 	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID) ON DELETE CASCADE,
-	FOREIGN KEY (RACID) REFERENCES Facility (RACID)
+	FOREIGN KEY (RACID) REFERENCES Facility (RACID) ON UPDATE CASCADE
 );
 /* Many to Many Resident/Diagnosis intermediate table */
 CREATE TABLE ResidentDx(
@@ -163,7 +164,21 @@ CREATE TABLE Recommendation(
 	PRIMARY KEY (Title, RevID),
 	FOREIGN KEY (RevID) REFERENCES Review (RevID) ON DELETE CASCADE
 );
-SHOW TABLES;
+CREATE TABLE Antipsychotic(
+	RevID INT NOT NULL,
+	ResidentID INT NOT NULL,
+	MedID INT NOT NULL,
+	PRIMARY KEY (RevID, MedID, ResidentID),
+	FOREIGN KEY (RevID) REFERENCES Review (RevID),
+	FOREIGN KEY (ResidentID) REFERENCES Resident (ResidentID),
+	FOREIGN KEY (MedID) REFERENCES Medication (MedID) ON DELETE CASCADE
+);
+/* Trigger */
+CREATE TRIGGER update_antipsychotic
+AFTER INSERT ON ResidentRx
+FOR EACH ROW
+INSERT INTO Antipsychotic (SELECT Review.RevID, Resident.ResidentID, ResidentRx.MedID FROM Resident, ResidentRx, Medication, Review WHERE new.RevID = Review.RevID AND Resident.ResidentID = Review.ResidentID AND ResidentRx.RevID = Review.RevID AND ResidentRx.MedID = Medication.MedID
+AND Medication.Class LIKE 'Antipsychotic');
 /*
 source /path/to/med_reviews/private/sql_scripts/INSERT_SQL.sql;
 */

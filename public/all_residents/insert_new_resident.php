@@ -51,7 +51,7 @@ $facility_string = facility_options($all_facilities, $facility);
 				</tr>
 				<tr>
 					<td><label> Medicare:</label></td>
-					<td><input class="insert" type="interger" name="Medicare" id="Medicare" value='<?php echo $medicare; ?>'></td>
+					<td><input class="insert" type="text" name="Medicare" id="Medicare" value='<?php echo $medicare; ?>'></td>
 				</tr>
 				<tr>
 					<td><label>DOB:</label></td>

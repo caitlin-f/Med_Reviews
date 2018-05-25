@@ -117,7 +117,7 @@ function medication_string($medications) {
 	return $medication_string;
 }
 
-// displays an alert depending on true/false boolean for inserting resident
+// displays an alert depending on true/false boolean for INSERT
 function insert_success($success, $msg) {
 	if ($success == true) {
 		echo "<script type='text/javascript'> alert ('New Record Inserted Successfully');</script>";
@@ -126,14 +126,30 @@ function insert_success($success, $msg) {
 	}
 }
 
-// displays alert depending on true.fase boolean for deleting resident
+// displays alert depending on true/false boolean for DELETE
 function delete_success($success, $msg) {
-	echo "delete function";
 	if ($success == true) {
 		echo "<script type='text/javascript'> alert ('Record Deleted');</script>";
 	} else {
 		echo "<script type = 'text/javascript'> alert ('Unable to delete : ".$msg."');</script>";
 	}
+}
+
+// displays alert depending on true/false boolean for UPDATE
+function update_success($success, $msg) {
+	if ($success == true) {
+		echo "<script type='text/javascript'> alert ('Record Updated');</script>";
+	} else {
+		echo "<script type = 'text/javascript'> alert ('Unable to update: ".$msg."');</script>";
+	}
+}
+
+function medication_options_string($all_medications) {
+	$option_string = '';
+	foreach($all_medications as $medication) {
+		$option_string .= '<option value="'.$medication['MedID'].'">'.$medication['GenericName'].", ".$medication['Strength'].", ".$medication['Form'].'</option>';
+	}
+	return $option_string;
 }
 ?>
 
