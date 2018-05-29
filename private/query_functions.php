@@ -255,7 +255,7 @@ function get_pharm_avg_reviews() {
 function get_max_bed_num() {
 	global $db;
 
-	$sql = "SELECT MAX(BedNumber) AS max FROM facility";
+	$sql = "SELECT MAX(BedNumber) AS max FROM Facility";
 	$result = $db->query($sql);
 	$array = $result->fetchALL(PDO::FETCH_ASSOC);
 	return $array;
@@ -265,7 +265,7 @@ function get_max_bed_num() {
 function get_min_bed_num() {
 	global $db;
 
-	$sql = "SELECT MIN(BedNumber) AS min FROM facility";
+	$sql = "SELECT MIN(BedNumber) AS min FROM Facility";
 	$result = $db->query($sql);
 	$array = $result->fetchALL(PDO::FETCH_ASSOC);
 	return $array;
@@ -275,7 +275,7 @@ function get_min_bed_num() {
 function get_avg_bed_num() {
 	global $db;
 
-	$sql = "SELECT ROUND(AVG(BedNumber)) AS avg FROM facility";
+	$sql = "SELECT ROUND(AVG(BedNumber)) AS avg FROM Facility";
 	$result = $db->query($sql);
 	$array = $result->fetchALL(PDO::FETCH_ASSOC);
 	return $array;
