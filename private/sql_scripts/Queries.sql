@@ -33,7 +33,7 @@ FROM Facility;
 SELECT P.PharmID
 FROM Pharmacist P
 WHERE P.PharmID NOT IN (
-SELECT Rev.RevID
+SELECT Rev.PharmID
 FROM Review Rev
 WHERE NOT EXISTS (
 SELECT Rev.RevID

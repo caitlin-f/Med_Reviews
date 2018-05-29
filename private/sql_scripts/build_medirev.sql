@@ -188,7 +188,7 @@ INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExp
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Lyle', 'Clavette','8937493030','2018-09-30','9553934', '2018-09-11', 0498954654, 'ClavetteL@RMMR.com');
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Cleaveland', 'Littleton', '6490280850', '2018-09-30', '9845372' ,'2018-08-25', 0424585649, 'LittletonC@RMMR.com');
 INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Chairmain', 'Griggs', '7493058603', '2018-09-30','8508090','2019-04-30', 0492723542, 'GriggsC@RMMR.com');
-INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Caitlin', 'Falconer', '1234567890', '2018-09-30','1234567','2018-06-30', 0415123456, 'FalconerC@RMMR.com');
+INSERT INTO Pharmacist (FirstName, LastName, RegistrationNumber, RegistrationExpiry, AccreditationNumber, AccreditationExpiry, Phone, Email) VALUES ('Nick', 'The-Pharmacist', '1234567890', '2018-09-30','1234567','2018-06-30', 0415123456, 'FalconerC@RMMR.com');
 # Clinic
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Brisbane Central Medical Center', 'Larry', 'John', 'BCmedcent@gmail.com', 0732363409,'198-202 Adelaide St','Brisbane', 'QLD', 4000);
 INSERT INTO Clinic (Name, ManagerFirstName, ManagerLastName, Email, Phone, StreetAddress, Suburb, State, PostCode) VALUES ('Bribane Clinic', 'Amenda', 'Lot', 'brisbaneclinic@gmail.com', 0732704555, '79 Whickham Terrace', 'Brisbane', 'QLD', 4000);
@@ -206,6 +206,7 @@ INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Kendall', 'Ni
 INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Anna-Marie', 'Hamilton', '400888888880', '1928-04-05');
 INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Milan', 'Bateman', '40099999990', '1927-10-09');
 INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Travis', 'Driscoll', '40012121210', '1922-05-23');
+INSERT INTO Resident (FirstName, LastName, Medicare, DOB) VALUES ('Hassan', 'Khosravi', '79017901790', '1907-09-01');
 # Facility
 INSERT INTO Facility VALUES (1111,'Regis', 'Regis Yeronga', '0733887088', 200, 'yeronga@regis.com', 'Don', 'Brown', '1 Facility St', 'Yeronga', 'QLD', 4103);
 INSERT INTO Facility VALUES (2222,'Regis', 'Regis Bulimba', '0733896500', 150, 'bulimba@regis.com', 'Mercy', 'May', '2 Facility St', 'Bulimba', 'QLD', 4002);
@@ -264,10 +265,8 @@ INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VAL
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (3,3,3,'2018-04-03','2018-04-13');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (4,4,4,'2018-04-04','2018-04-14');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (5,5,5,'2018-04-05','2018-04-15');
-INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,1,1,'2016-03-05','2016-03-15');
-INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (2,2,2,'2016-03-05','2016-03-15');
-INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (3,3,3,'2016-03-05','2016-03-15');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate) VALUES (1,1,6,'2018-04-20');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,6,11,'2018-03-05','2018-03-15');
 # ResidentRx
 INSERT INTO ResidentRx VALUES (1,6,'Daily','1');
 INSERT INTO ResidentRx VALUES (1,2,'Daily','2');
@@ -296,6 +295,7 @@ INSERT INTO ResidentHome VALUES (7,3333,'2018-04-01');
 INSERT INTO ResidentHome VALUES (8,3333,'2018-04-01');
 INSERT INTO ResidentHome VALUES (9,1111,'2018-04-01');
 INSERT INTO ResidentHome VALUES (10,2222,'2018-04-01');
+INSERT INTO ResidentHome VALUES (11, 3333, '2018-04-01');
 # ResidentDx
 INSERT INTO ResidentDx VALUES (1, 'Hypertension');
 INSERT INTO ResidentDx VALUES (1, 'Diabetes');

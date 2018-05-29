@@ -81,7 +81,8 @@ $medication_options_string = medication_options_string($all_medications);
 			<form method="post" action="add_meds.php">
 			<p>Current medications: 
 				<input class="link" type="submit" value="Save" style="color: blue; padding-bottom: 15px; background: none;">
-				<input type="hidden" name="id" id="id" value="<?php echo $id ?>"></p>
+				<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+				<input type="hidden" name="RevID" id="RevID" value="<?php echo $rev ?>"></p>
 			<table class="list">
 				<tr>
 					<th>Medication</th>
@@ -92,9 +93,7 @@ $medication_options_string = medication_options_string($all_medications);
 				</tr>
 				<?php echo medication_string($medications); ?>
 				<td colspan="3">
-					<input type="hidden" name="RevID" id="RevID" value="<?php echo $rev ?>">
-					<select class="insert" name="medication"><option value="">Select Medication</option><?php echo $medication_options_string; ?>
-					</select>
+					<select class="insert" name="medication"><option value="">Select Medication</option><?php echo $medication_options_string; ?></select>
 				</td>
 				<td>
 					<input class="edit" type="text" name="Dose" id="Dose">
@@ -109,13 +108,16 @@ $medication_options_string = medication_options_string($all_medications);
 		</section>
 
 		<section id="reviews">
-			<p>Recommendations:</p>
+			<form method="post" action="add_rec.php">
+			<p>Recommendations: 
+				<input class="link" type="submit" value="Save" style="color: blue; padding-bottom: 15px; background: none;">
+				<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+				<input type="hidden" name="RevID" id="RevID" value="<?php echo $rev ?>"></p>
 			<table class="list">
 				<tr>
 					<th>Title</th>
 					<th>Information</th>
 					<th>Options</th>
-					<th>&nbsp;</th>
 				</tr>
 				<?php foreach($recommendations as $rec) { ?>
 					<tr>
@@ -124,6 +126,11 @@ $medication_options_string = medication_options_string($all_medications);
 						<td><?php echo h($rec['Options']); ?></td>
 					</tr>
 				<?php } ?>
+				<tr>
+					<td><input class="edit" type="text" name="Title" id="Title"></td>
+					<td><input class="edit" type="text" name="Info" id="Info"></td>
+					<td><input class="edit" type="text" name="Option" id="Option"></td>
+				</tr>
 
 			</table>
 		</section>

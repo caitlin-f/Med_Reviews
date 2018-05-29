@@ -33,7 +33,7 @@ cLass TableRows extends RecursiveIteratorIterator {
 
 try {
      $conn =db_connect();
-	$stmt = $conn-> prepare("SELECT P.FirstName, P.LastName FROM Pharmacist P WHERE P.PharmID NOT IN (SELECT Rev.RevID FROM Review Rev WHERE NOT EXISTS (SELECT Rev.RevID FROM Recommendation Rec WHERE Rev.RevID = Rec.RevID AND Rev.PharmID = P.PharmID));");
+	$stmt = $conn-> prepare("SELECT P.FirstName, P.LastName FROM Pharmacist P WHERE P.PharmID NOT IN (SELECT Rev.PharmID FROM Review Rev WHERE NOT EXISTS (SELECT Rev.RevID FROM Recommendation Rec WHERE Rev.RevID = Rec.RevID AND Rev.PharmID = P.PharmID));");
 	$stmt ->execute();
 
 	//set the resulting array to associative

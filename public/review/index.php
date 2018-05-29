@@ -80,13 +80,12 @@ $dates = get_rev_dates($rev);
 		</section>
 
 		<section id="reviews">
-			<p>Recommendations:</p>
+			<p>Recommendations: <a class="action" href="<?php echo url_to('/review/edit_rev.php?id='.h(u($id)).','.h(u($rev)));?>">Add</a></p>
 			<table class="list">
 				<tr>
 					<th>Title</th>
 					<th>Information</th>
 					<th>Options</th>
-					<th>&nbsp;</th>
 				</tr>
 				<?php foreach($recommendations as $rec) { ?>
 					<tr>

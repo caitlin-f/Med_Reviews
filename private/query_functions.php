@@ -408,4 +408,29 @@ function insert_new_medication($revID, $medID, $freq, $dose) {
 	return $success;
 }
 
+// insert new review recommendation
+function insert_recommendation($revID, $title, $info, $option) {
+	global $db;
+
+	$sql = "BEGIN";
+	$db->query($sql);
+
+	$stmt = $db->prepare("INSERT INTO Recommendation
+		VALUES (:title, :revID, :info, :option)");
+
+	$stmt->bindParam(':title', $title);
+	$stmt->bindParam(':revID', $revID);
+	$stmt->bindParam(':info', $info);
+	$stmt->bindParam(':option', $option);
+
+	$success = $stmt->execute();
+
+	$sql = "COMMIT";
+	$db->query($sql);
+
+	echo "Success";
+
+	return $success;
+}
+
 ?>

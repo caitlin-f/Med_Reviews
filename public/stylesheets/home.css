@@ -556,7 +556,7 @@ input.insert {
 }
 
 input.edit {
-  width: 120px;
+  width: 100%;
   padding: 3px;
   font-size: 14px;
 }
