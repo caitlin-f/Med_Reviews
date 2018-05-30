@@ -267,6 +267,9 @@ INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VAL
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (5,5,5,'2018-04-05','2018-04-15');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate) VALUES (1,1,6,'2018-04-20');
 INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (1,6,11,'2018-03-05','2018-03-15');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (2,2,7,'2018-05-01','2018-05-10');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (3,2,8,'2018-05-02','2018-05-12');
+INSERT INTO Review (DoctorID, PharmID, ResidentID, ReferralDate, ReviewDate) VALUES (4,3,10,'2018-05-02','2018-05-11');
 # ResidentRx
 INSERT INTO ResidentRx VALUES (1,6,'Daily','1');
 INSERT INTO ResidentRx VALUES (1,2,'Daily','2');
