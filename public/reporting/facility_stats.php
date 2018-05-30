@@ -3,9 +3,6 @@
 	$min = get_min_bed_num();
 	$max = get_max_bed_num();
 	$avg = get_avg_bed_num();
-	echo $min;
-	echo $max;
-	echo $avg;
 ?>
 
 <?php $page_title = 'Facility - Bed Number Stats'; ?>
